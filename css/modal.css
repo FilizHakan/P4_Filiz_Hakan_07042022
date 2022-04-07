@@ -35,7 +35,6 @@ img {
 }
 .header-logo {
     float: left;
-    margin-left: 3rem;
 }
 .main-navbar {
     float: right;
@@ -411,8 +410,6 @@ input[data-error]::after {
 .hero-section {
   min-height: 93vh;
   border-radius: 10px;
-  margin-left: 3rem;
-  margin-right: 3rem;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   overflow: hidden;
@@ -468,6 +465,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;

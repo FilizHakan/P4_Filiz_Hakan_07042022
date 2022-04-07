@@ -66,7 +66,7 @@
             >
               <div
                 class="formData">
-                <label>Prénom</label><br>
+                <label data-error-message="Veuillez entrer 2 caractères ou plus pour le champ du prénom." for="first">Prénom</label><br>
                 <input
                   class="text-control"
                   type="text"
@@ -77,7 +77,7 @@
               </div>
               <div
                 class="formData">
-                <label>Nom</label><br>
+                <label data-error-message="Veuillez entrer 2 caractères ou plus pour le champ du nom." for="last">Nom</label><br>
                 <input
                   class="text-control"
                   type="text"
@@ -87,7 +87,7 @@
               </div>
               <div
                 class="formData">
-                <label>E-mail</label><br>
+                <label data-error-message="Veuillez entrer une adresse email valide." for="email">E-mail</label><br>
                 <input
                   class="text-control"
                   type="email"
@@ -97,7 +97,7 @@
               </div>
               <div
                 class="formData">
-                <label>Date de naissance</label><br>
+                <label data-error-message="Vous devez entrer votre date de naissance." for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
                   type="date"
@@ -107,10 +107,10 @@
               </div>
               <div
                 class="formData">
-                <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
+                <label for="tournaments">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
-              <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
+              <p class="text-label" for="which">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
                 class="formData">
                 <input
@@ -182,7 +182,8 @@
               </div>
 
               <div
-                class="formData">
+                class="formData" data-error-message="Vous devez vérifier que vous acceptez les termes et conditions d'utilisation."
+                >
                 <input
                   class="checkbox-input"
                   type="checkbox"
