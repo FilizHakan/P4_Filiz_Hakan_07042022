@@ -11,6 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const modalCloseBtn = document.getElementsByClassName('close');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -19,5 +20,24 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   modalbg.style.display = "block";
 }
+
+// Close modal event
+  modalCloseBtn[0].addEventListener('click', closeModal);
+
+// Close modal form with the cross
+function closeModal() {
+  modalbg.style.display="none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modalbg) {
+    modalbg.style.display = "none";
+  }
+}
+
+
+
+
 
 
