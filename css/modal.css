@@ -70,6 +70,8 @@ img {
 
 .topnav a.active {
   background-color: #ff0000;
+  text-decoration: underline white ;
+  text-underline-offset: 5px;
   color: #ffffff;
   border-radius: 15px;
 }
