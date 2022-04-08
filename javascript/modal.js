@@ -124,7 +124,7 @@ email.addEventListener('input', emailValidation);
     }
     hideErrorMessage(parent);
     return true;
-  }}
+}
 
 // BIRTHDATE:
 // Fetching with Event listener for the element birthdate
@@ -134,14 +134,29 @@ birthDate.addEventListener('input', birthDateValidation);
 const selectedBirthDate = new Date(data.birthDate);
 const currentDate = new Date(Date.now());
 
-  // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
+  // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
   function birthDateValidation () {
     let parent = birthDate.closest('div');
     showErrorMessage(parent);
-    if (birthRegex.test(reserve.birthDate.value) || (selectedDate > currentDate)) {
+    if (birthRegex.test(reserve.birthDate.value) || (selectedBirthDate > currentDate)) {
       return false;
-    } 
+    }
       hideErrorMessage(parent);
+      return true;
+  }
+
+// TOURNAMENT COUNTS:
+// Fetching with Event listener for the number of tournaments
+tournamentCounts.addEventListener('input', tournamentCountsValidation);
+
+  // Check if tournament counts is not empty + must be following the validation REGEX we have created above (format ...@...)
+  function tournamentCountsValidation () {
+    let parent = tournamentCounts.closest('div');
+    showErrorMessage(parent);
+    if (tournamentCounts.value < '0') {
+      return false;
+    }
+    hideErrorMessage(parent);
       return true;
   }
 
