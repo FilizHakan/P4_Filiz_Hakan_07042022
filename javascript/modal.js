@@ -37,9 +37,10 @@ window.onclick = function(event) {
 }
 
 // DOM ELEMENTS - SAVE FOR EACH ELEMENT IN HTML
-const formSubmission = document.querySelector('form')
+const formSubmission = document.querySelector('form');
+const modalBody = document.querySelector('.modal-body');
 const firstName = document.getElementById('first');
-const lastName = document.getElementById('last')
+const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthDate = document.getElementById('birthdate');
 const tournamentCounts = document.querySelector("input[type=number]");
@@ -75,10 +76,27 @@ reservationForm.addEventListener("submit", (event) => validate(event))
 // Fetching with Event listener for the element submit
 document.querySelector('form').addEventListener('submit', submitForm);
 
+// CREATE THE 'FERMER' BUTTON WITH JAVASCRIPT
+function closeButton () {
+  let button = document.createElement("button");
+  button.innerHTML = "Fermer";
+  modalBody.appendChild(button);
+  button.onclick = function () {
+    modalbg.style.display = "none";
+  }
+}
+
 // PREVENT BROWSER FROM DEFAULT BEHAVIOR (CHANGING PAGE ONCLICK)  
 function submit(elt){
   elt.preventDefault();
+  modalBody.innerHTML = ' ';
+  modalBody.style.display = "flex";
+  modalBody.style.height = "700px";
+  modalBody.style.flexdirection = "column";
+  thanksMessage();
+  closeButton();
 }
+
 // FIRST NAME VALIDATION CHECK: 
 // Fetching with Event listener for the element first name
 firstName.addEventListener('input', firstNameValidation); 
@@ -91,10 +109,10 @@ firstName.addEventListener('input', firstNameValidation);
       return false;
     }
     if (firstName.value.length > 20) {
-    return false;
+      return false;
     }
     hideErrorMessage(parent);
-    return false;
+      return false;
   }
 
 // LAST NAME VALIDATION CHECK: 
@@ -109,10 +127,10 @@ lastName.addEventListener('input', lastNameValidation);
       return false;
     }
     if (lastName.value.length > 20) {
-    return false;
+      return false;
     }
     hideErrorMessage(parent);
-    return false;
+      return false;
   }
 
 // EMAIL ADDRESS VALIDATION CHECK: 
@@ -127,7 +145,7 @@ email.addEventListener('input', emailValidation);
       return false;
     }
     hideErrorMessage(parent);
-    return true;
+      return true;
 }
 
 // BIRTHDATE VALIDATION CHECK:
@@ -177,7 +195,7 @@ function locationsRadioBtnValidation () {
   for (checkbox of locationsRadioBtn) {
     if (checkbox.checked) {
       hideErrorMessage(parent);
-      return true;
+        return true;
     }
   }
 }
