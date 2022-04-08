@@ -106,8 +106,6 @@ img {
   }
 }
 
-
-
  @media screen and (min-width: 470px) and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
