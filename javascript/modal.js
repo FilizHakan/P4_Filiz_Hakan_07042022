@@ -74,16 +74,17 @@ reservationForm.addEventListener("submit", (event) => validate(event))
 // SUBMIT FORM: 
 // Fetching with Event listener for the element submit
 document.querySelector('form').addEventListener('submit', submitForm);
-// PREVENT BROWSER FROM CHANGING PAGE
+
+// PREVENT BROWSER FROM DEFAULT BEHAVIOR (CHANGING PAGE ONCLICK)  
 function submit(elt)
 {
   elt.preventDefault();
 
-// FIRST NAME: 
+// FIRST NAME VALIDATION CHECK: 
 // Fetching with Event listener for the element first name
 firstName.addEventListener('input', firstNameValidation); 
 
-  // Check if first name strictly superior is between 2 and 20, and check the REGEX condition
+  // Check if first name is strictly between 2 and 20, and check the REGEX condition
   function firstNameValidation () {
     let parent = firstName.closest('.formData');
     showErrormessage(parent);
@@ -97,7 +98,7 @@ firstName.addEventListener('input', firstNameValidation);
     return false;
   }
 
-// LAST NAME: 
+// LAST NAME VALIDATION CHECK: 
 // Fetching with Event listener for the element last name
 lastName.addEventListener('input', lastNameValidation); 
 
@@ -115,7 +116,7 @@ lastName.addEventListener('input', lastNameValidation);
     return false;
   }
 
-// EMAIL ADDRESS: 
+// EMAIL ADDRESS VALIDATION CHECK: 
 // Fetching with Event listener for the element email
 email.addEventListener('input', emailValidation);
 
@@ -130,7 +131,7 @@ email.addEventListener('input', emailValidation);
     return true;
 }
 
-// BIRTHDATE:
+// BIRTHDATE VALIDATION CHECK:
 // Fetching with Event listener for the element birthdate
 birthDate.addEventListener('input', birthDateValidation); 
 
@@ -149,7 +150,7 @@ const currentDate = new Date(Date.now());
       return true;
   }
 
-// TOURNAMENT COUNTS (IN NUMBER):
+// TOURNAMENT COUNTS VALIDATION CHECK:
 // Fetching with Event listener for the number of tournaments
 tournamentCounts.addEventListener('input', tournamentCountsValidation);
 
@@ -164,7 +165,7 @@ tournamentCounts.addEventListener('input', tournamentCountsValidation);
       return true;
   }
 
-// RADIO BUTTON FOR CITY TOURNAMENT 
+// RADIO BUTTON FOR CITY TOURNAMENT VALIDATION CHECK:
 // Fetching with "for...of..." Event listener for the city tournament
 for (checkbox of locationsRadioBtn) {
   checkbox.addEventListener('change', locationsRadioBtnValidation);
@@ -182,6 +183,23 @@ function locationsRadioBtnValidation () {
   }
 }
 }
+
+// TERMS AND CONDITIONS VALIDATION CHECK
+// Fetching with Event listener for the element of terms and conditions
+termsConditionsCheckbox.addEventListener('change', termsConditionsValidation);
+
+// Check if terms and conditions is checked
+function termsConditionsValidation () {
+  let parent = termsConditionsCheckbox.closest("formData");
+  showErrorMessage(parent);
+  if (!termsConditionsCheckbox.checked) {
+    return false;
+  }
+    hideErrorMessage(parent);
+    return true;
+}
+
+
 
 
 
