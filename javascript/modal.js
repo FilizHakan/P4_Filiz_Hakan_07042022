@@ -44,8 +44,13 @@ const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthDate = document.getElementById('birthdate');
+const newYork = document.getElementById("location1");
+const sanFrancisco = document.getElementById("location2");
+const seattle = document.getElementById("location3");
+const chicago = document.getElementById("location4");
+const boston = document.getElementById("location5");
+const portland = document.getElementById("location6");
 const tournamentCounts = document.querySelector("input[type=number]");
-const locationsRadioBtn = document.querySelector("input[name='location']");
 const termsConditionsCheckbox = document.querySelector("input[name='conditions']");
 const submitForm = document.getElementById('.btn-submit');
 const thankYouMessage = document.querySelector('.thanks');
@@ -101,7 +106,7 @@ firstName.addEventListener('input', firstNameValidation);
 
   // Check if first name is strictly between 2 and 20, and check the REGEX condition
   function firstNameValidation () {
-    let parent = firstName.closest('.formData');
+    let parent = firstName.closest('div');
     showErrormessage(parent);
     if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value === "")) {
       return false;
@@ -119,7 +124,7 @@ lastName.addEventListener('input', lastNameValidation);
 
   // Check if last name is empty or not with message + length must be strictly superior to 2
   function lastNameValidation () {
-    let parent = lastName.closest('.formData');
+    let parent = lastName.closest('div');
     showErrorMessage(parent);
     if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false || (lastName.value === "")) {
       return false;
@@ -137,7 +142,7 @@ email.addEventListener('input', emailValidation);
 
   // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
   function emailValidation () {
-    let parent = email.closest('.formData');
+    let parent = email.closest('div');
     showErrorMessage(parent);
     if(emailRegex.test(reserve.email.value)) {
       return false;
@@ -156,7 +161,7 @@ const currentDate = new Date(Date.now());
 
   // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
   function birthDateValidation () {
-    let parent = birthDate.closest('.formData');
+    let parent = birthDate.closest('div');
     showErrorMessage(parent);
     if (birthRegex.test(reserve.birthDate.value) || (selectedBirthDate > currentDate)) {
       return false;
@@ -171,7 +176,7 @@ tournamentCounts.addEventListener('input', tournamentCountsValidation);
 
   // Check if tournament counts is checked and validated
   function tournamentCountsValidation () {
-    let parent = tournamentCounts.closest('.formData');
+    let parent = tournamentCounts.closest('div');
     showErrorMessage(parent);
     if ((tournamentCounts.value > 98) || (tournamentCounts.value === "")){
       return false;
@@ -181,22 +186,13 @@ tournamentCounts.addEventListener('input', tournamentCountsValidation);
   }
 
 // RADIO BUTTON FOR CITY TOURNAMENT VALIDATION CHECK:
-// Fetching with "for...of..." Event listener for the city tournament
-for (checkbox of locationsRadioBtn) {
-  checkbox.addEventListener('change', locationsRadioBtnValidation);
-}
-
 // Check if tournament city is checked and validated
-function locationsRadioBtnValidation () {
-  let parent = checkbox.closest('.formData');
-  showErrorMessage(parent);
-  for (checkbox of locationsRadioBtn) {
-    if (checkbox.checked) {
-      hideErrorMessage(parent);
-        return true;
+    if ((newYork.checked) || (sanFrancisco.checked) || (seattle.checked) || (chicago.checked) || (boston.checked) || (portland.checked)) {
+      hideErrorMessage(location1)
+    }else{
+      showErrorMessage(location1)
     }
-  }
-}
+  
 
 // TERMS AND CONDITIONS VALIDATION CHECK
 // Fetching with Event listener for the element of terms and conditions
