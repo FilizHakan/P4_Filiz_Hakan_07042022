@@ -80,7 +80,7 @@ reservationForm.addEventListener("submit", (event) => validate(event))
 
 // SUBMIT FORM: 
 // Fetching with Event listener for the element submit
-document.querySelector('form').addEventListener('submit', submitForm);
+formSubmission.addEventListener('submit', submitForm);
 
 // CREATE THE 'FERMER' BUTTON AFTER SUBMISSION WITH JAVASCRIPT
 function closeButton () {
@@ -93,149 +93,147 @@ function closeButton () {
 }
 
 // Fetching with Event listener for the element submit
-form.addEventListener("submit, submit");
+form.addEventListener("submit", submit);
 
 // FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK 
 function submit(elt){
   elt.preventDefault();
-}
 
-// FIRST NAME VALIDATION CHECK: 
-// Fetching with Event listener for the element first name
-firstName.addEventListener('input', firstNameValidation); 
 
-  // Check if first name is strictly between 2 and 20, and check the REGEX condition
-  function firstNameValidation () {
-    let parent = firstName.closest('div');
-    showErrormessage(parent);
-    if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value === "")) {
-      return false;
+  // FIRST NAME VALIDATION CHECK: 
+  // Fetching with Event listener for the element first name
+  firstName.addEventListener('input', firstNameValidation); 
+
+    // Check if first name is strictly between 2 and 20, and check the REGEX condition
+    function firstNameValidation () {
+      let parent = firstName.closest('.formData');
+      showErrormessage(parent);
+      if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value === "")) {
+        return false;
+      }
+      if (firstName.value.length > 20) {
+        return false;
+      }
+      hideErrorMessage(parent);
+        return false;
     }
-    if (firstName.value.length > 20) {
-      return false;
+
+  // LAST NAME VALIDATION CHECK: 
+  // Fetching with Event listener for the element last name
+  lastName.addEventListener('input', lastNameValidation); 
+
+    // Check if last name is empty or not with message + length must be strictly superior to 2
+    function lastNameValidation () {
+      let parent = lastName.closest('.formData');
+      showErrorMessage(parent);
+      if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false || (lastName.value === "")) {
+        return false;
+      }
+      if (lastName.value.length > 20) {
+        return false;
+      }
+      hideErrorMessage(parent);
+        return false;
     }
-    hideErrorMessage(parent);
-      return false;
+
+  // EMAIL ADDRESS VALIDATION CHECK: 
+  // Fetching with Event listener for the element email
+  email.addEventListener('input', emailValidation);
+
+    // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
+    function emailValidation () {
+      let parent = email.closest('.formData');
+      showErrorMessage(parent);
+      if(emailRegex.test(reserve.email.value)) {
+        return false;
+      }
+      hideErrorMessage(parent);
+        return true;
   }
 
-// LAST NAME VALIDATION CHECK: 
-// Fetching with Event listener for the element last name
-lastName.addEventListener('input', lastNameValidation); 
+  // BIRTHDATE VALIDATION CHECK:
+  // Fetching with Event listener for the element birthdate
+  birthDate.addEventListener('input', birthDateValidation); 
 
-  // Check if last name is empty or not with message + length must be strictly superior to 2
-  function lastNameValidation () {
-    let parent = lastName.closest('div');
-    showErrorMessage(parent);
-    if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false || (lastName.value === "")) {
-      return false;
+  // CONDITION: Date management for when user selects the dates + the current date
+  const selectedBirthDate = new Date(data.birthDate);
+  const currentDate = new Date(Date.now());
+
+    // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
+    function birthDateValidation () {
+      let parent = birthDate.closest('.formData');
+      showErrorMessage(parent);
+      if (birthRegex.test(reserve.birthDate.value) || (selectedBirthDate > currentDate)) {
+        return false;
+      }
+        hideErrorMessage(parent);
+        return true;
     }
-    if (lastName.value.length > 20) {
-      return false;
+
+  // TOURNAMENT NUMBER VALIDATION CHECK:
+  // Fetching with Event listener for the number of tournaments
+  tournamentCounts.addEventListener('input', tournamentCountsValidation);
+
+    // Check if tournament counts is checked and validated
+    function tournamentCountsValidation () {
+      let parent = tournamentCounts.closest('.formData');
+      showErrorMessage(parent);
+      if ((tournamentCounts.value > 98) || (tournamentCounts.value === "")){
+        return false;
+      }
+      hideErrorMessage(parent);
+        return true;
     }
-    hideErrorMessage(parent);
-      return false;
-  }
 
-// EMAIL ADDRESS VALIDATION CHECK: 
-// Fetching with Event listener for the element email
-email.addEventListener('input', emailValidation);
+  // RADIO BUTTON FOR CITY TOURNAMENT VALIDATION CHECK:
+  // Check if location 1 is checked and validated
+      if ((newYork.checked) || (sanFrancisco.checked) || (seattle.checked) || (chicago.checked) || (boston.checked) || (portland.checked)) {
+        hideErrorMessage(location1)
+      }else{
+        showErrorMessage(location1)
+      }
+    
 
-  // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
-  function emailValidation () {
-    let parent = email.closest('div');
+  // TERMS AND CONDITIONS VALIDATION CHECK
+  function termsConditionsValidation () {
+    let parent = termsConditionsCheckbox.closest(".formData");
     showErrorMessage(parent);
-    if(emailRegex.test(reserve.email.value)) {
-      return false;
-    }
-    hideErrorMessage(parent);
-      return true;
-}
-
-// BIRTHDATE VALIDATION CHECK:
-// Fetching with Event listener for the element birthdate
-birthDate.addEventListener('input', birthDateValidation); 
-
-// CONDITION: Date management for when user selects the dates + the current date
-const selectedBirthDate = new Date(data.birthDate);
-const currentDate = new Date(Date.now());
-
-  // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
-  function birthDateValidation () {
-    let parent = birthDate.closest('div');
-    showErrorMessage(parent);
-    if (birthRegex.test(reserve.birthDate.value) || (selectedBirthDate > currentDate)) {
+    if (!termsConditionsCheckbox.checked) {
       return false;
     }
       hideErrorMessage(parent);
       return true;
   }
 
-// TOURNAMENT NUMBER VALIDATION CHECK:
-// Fetching with Event listener for the number of tournaments
-tournamentCounts.addEventListener('input', tournamentCountsValidation);
+  // FINAL FORM VALIDATION CONDITIONS
 
-  // Check if tournament counts is checked and validated
-  function tournamentCountsValidation () {
-    let parent = tournamentCounts.closest('div');
-    showErrorMessage(parent);
-    if ((tournamentCounts.value > 98) || (tournamentCounts.value === "")){
-      return false;
+    // SET UP FUNCTION FOR THANK YOU MESSAGE
+    function showThanksMessage(){
+      form.style.display = "none";
+      thankYouMessage.style.display = "flex";
     }
-    hideErrorMessage(parent);
-      return true;
-  }
-
-// RADIO BUTTON FOR CITY TOURNAMENT VALIDATION CHECK:
-// Check if tournament city is checked and validated
-    if ((newYork.checked) || (sanFrancisco.checked) || (seattle.checked) || (chicago.checked) || (boston.checked) || (portland.checked)) {
-      hideErrorMessage(location1)
-    }else{
-      showErrorMessage(location1)
+    function hideThanksMessage(){
+      thankYouMessage.style.display = "";
     }
-  
 
-// TERMS AND CONDITIONS VALIDATION CHECK
-// Fetching with Event listener for the element of terms and conditions
-termsConditionsCheckbox.addEventListener('change', termsConditionsValidation);
-
-// Check if terms and conditions is checked
-function termsConditionsValidation () {
-  let parent = termsConditionsCheckbox.closest("formData");
-  showErrorMessage(parent);
-  if (!termsConditionsCheckbox.checked) {
-    return false;
-  }
-    hideErrorMessage(parent);
-    return true;
-}
-
-// FINAL FORM VALIDATION CONDITIONS
-// Fetching with Event listener for the element of form (when user clicks)
-formSubmission.addEventListener('change', formFinalValidation);
-
-  // SET UP FUNCTION FOR THANK YOU MESSAGE
-  function showThanksMessage(){
-    form.style.display = "none";
-    thankYouMessage.style.display = "flex";
-  }
-  function hideThanksMessage(){
-    thankYouMessage.style.display = "";
-  }
-
-  // Check for all the conditions to validate the final submission
-  function formFinalValidation () {
+    // Fetching with Event listener for the element of form (when user clicks)
+    submitForm.addEventListener('click', function() {
 
     if (firstNameValidation () 
     && lastNameValidation () 
     && emailValidation ()
     && birthDateValidation ()
-    && locationsRadioBtnValidation ()
-    && termsConditionsValidation ())
-    {
+    && ((newYork.checked) || (sanFrancisco.checked) || (seattle.checked) || (chicago.checked) || (boston.checked) || (portland.checked))
+    && termsConditionsValidation ()){
+      
       showThanksMessage();
-      }
+      }else{
       hideThanksMessage();
-    }
+      } 
+  });
+
+}
+    
 
     
   
