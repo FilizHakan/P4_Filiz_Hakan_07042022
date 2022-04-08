@@ -210,6 +210,11 @@ formSubmission.addEventListener('change', formFinalValidation);
     submitForm.style.cursor = 'allowed';
   }
 
+    function disableSubmission () {
+      submitForm.disabled = true;
+      submitForm.style.opacity = '1';
+      submitForm.style.cursor = 'pointer';
+    }
   // Check for all the conditions to validate the final submission
   function formFinalValidation () {
 
@@ -220,8 +225,11 @@ formSubmission.addEventListener('change', formFinalValidation);
     && locationsRadioBtnValidation ()
     && termsConditionsValidation ())
     {
-      
+      enableSubmission();
+      return true;
       }
+      disableSubmission();
+      return false;
     }
 
     // SET UP FUNCTION FOR THANK YOU MESSAGE

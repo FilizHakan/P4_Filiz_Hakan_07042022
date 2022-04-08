@@ -144,6 +144,15 @@ main {
   background: #3876ac;
 }
 
+.thanks {
+  display:none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 200px;
+}
+
 .footer {
   margin: 20px;
   padding: 10px;
