@@ -67,6 +67,10 @@ function hideErrorMessage(elt) {
   elt.setAttribute('data-error-visible', false)
 }
 
+// SET UP TO VALIDATE THE RESERVATION FORM
+const reservationForm = document.getElementById("reservationForm");
+reservationForm.addEventListener("submit", (event) => validate(event))
+
 // SUBMIT FORM: 
 // Fetching with Event listener for the element submit
 document.querySelector('form').addEventListener('submit', submitForm);
@@ -81,7 +85,7 @@ firstName.addEventListener('input', firstNameValidation);
 
   // Check if first name strictly superior is between 2 and 20, and check the REGEX condition
   function firstNameValidation () {
-    let parent = firstName.closest('div');
+    let parent = firstName.closest('.formData');
     showErrormessage(parent);
     if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false) {
       return false;
@@ -99,7 +103,7 @@ lastName.addEventListener('input', lastNameValidation);
 
   // Check if last name is empty or not with message + length must be strictly superior to 2
   function lastNameValidation () {
-    let parent = lastName.closest('div');
+    let parent = lastName.closest('.formData');
     showErrorMessage(parent);
     if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false) {
       return false;
@@ -117,7 +121,7 @@ email.addEventListener('input', emailValidation);
 
   // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
   function emailValidation () {
-    let parent = email.closest('div');
+    let parent = email.closest('.formData');
     showErrorMessage(parent);
     if(emailRegex.test(reserve.email.value)) {
       return false;
@@ -136,7 +140,7 @@ const currentDate = new Date(Date.now());
 
   // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
   function birthDateValidation () {
-    let parent = birthDate.closest('div');
+    let parent = birthDate.closest('.formData');
     showErrorMessage(parent);
     if (birthRegex.test(reserve.birthDate.value) || (selectedBirthDate > currentDate)) {
       return false;
@@ -151,7 +155,7 @@ tournamentCounts.addEventListener('input', tournamentCountsValidation);
 
   // Check if tournament counts is checked and validated
   function tournamentCountsValidation () {
-    let parent = tournamentCounts.closest('div');
+    let parent = tournamentCounts.closest('.formData');
     showErrorMessage(parent);
     if (tournamentCounts.value < '0') {
       return false;
@@ -168,7 +172,7 @@ for (checkbox of locationsRadioBtn) {
 
 // Check if tournament city is checked and validated
 function locationsRadioBtnValidation () {
-  let parent = checkbox.closest('div');
+  let parent = checkbox.closest('.formData');
   showErrorMessage(parent);
   for (checkbox of locationsRadioBtn) {
     if (checkbox.checked) {
@@ -178,5 +182,9 @@ function locationsRadioBtnValidation () {
   }
 }
 }
+
+
+
+
 
 
