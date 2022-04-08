@@ -145,11 +145,11 @@ const currentDate = new Date(Date.now());
       return true;
   }
 
-// TOURNAMENT COUNTS:
+// TOURNAMENT COUNTS (IN NUMBER):
 // Fetching with Event listener for the number of tournaments
 tournamentCounts.addEventListener('input', tournamentCountsValidation);
 
-  // Check if tournament counts is not empty + must be following the validation REGEX we have created above (format ...@...)
+  // Check if tournament counts is checked and validated
   function tournamentCountsValidation () {
     let parent = tournamentCounts.closest('div');
     showErrorMessage(parent);
@@ -160,3 +160,20 @@ tournamentCounts.addEventListener('input', tournamentCountsValidation);
       return true;
   }
 
+// RADIO BUTTON FOR CITY TOURNAMENT 
+// Fetching with "for...of..." Event listener for the city tournament
+for (checkbox of locationsRadioBtn) {
+  checkbox.addEventListener('change', locationsRadioBtnValidation);
+}
+
+// Check if tournament city is checked and validated
+function locationsRadioBtnValidation () {
+  let parent = checkbox.closest('div');
+  showErrorMessage(parent);
+  for (checkbox of locationsRadioBtn) {
+    if (checkbox.checked) {
+      hideErrorMessage(parent);
+      return true;
+    }
+  }
+}
