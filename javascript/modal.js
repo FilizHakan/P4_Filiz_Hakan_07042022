@@ -37,7 +37,7 @@ window.onclick = function(event) {
 }
 
 // DOM ELEMENTS - SAVE FOR EACH ELEMENT IN HTML
-const form = document.getElementById('reserve');
+const formSubmission = document.querySelector('form')
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last')
 const email = document.getElementById('email');
@@ -46,7 +46,7 @@ const tournamentCounts = document.querySelector("input[type=number]");
 const locationsRadioBtn = document.querySelector("input[name='location']");
 const termsConditionsCheckbox = document.querySelector("input[name='conditions']");
 const submitForm = document.getElementById('.btn-submit');
-const thankYouMessage = document.querySelector('.merci');
+const thankYouMessage = document.querySelector('.thanks');
 
 // REGEX
 // Set a REGEX: Email address must start with a string followed by '@', followed by another string
@@ -88,7 +88,7 @@ firstName.addEventListener('input', firstNameValidation);
   function firstNameValidation () {
     let parent = firstName.closest('.formData');
     showErrormessage(parent);
-    if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false) {
+    if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value === "")) {
       return false;
     }
     if (firstName.value.length > 20) {
@@ -106,7 +106,7 @@ lastName.addEventListener('input', lastNameValidation);
   function lastNameValidation () {
     let parent = lastName.closest('.formData');
     showErrorMessage(parent);
-    if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false) {
+    if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false || (lastName.value === "")) {
       return false;
     }
     if (lastName.value.length > 20) {
@@ -150,7 +150,7 @@ const currentDate = new Date(Date.now());
       return true;
   }
 
-// TOURNAMENT COUNTS VALIDATION CHECK:
+// TOURNAMENT NUMBER VALIDATION CHECK:
 // Fetching with Event listener for the number of tournaments
 tournamentCounts.addEventListener('input', tournamentCountsValidation);
 
@@ -158,7 +158,7 @@ tournamentCounts.addEventListener('input', tournamentCountsValidation);
   function tournamentCountsValidation () {
     let parent = tournamentCounts.closest('.formData');
     showErrorMessage(parent);
-    if (tournamentCounts.value < '0') {
+    if ((tournamentCounts.value > 98) || (tournamentCounts.value === "")){
       return false;
     }
     hideErrorMessage(parent);
@@ -199,7 +199,40 @@ function termsConditionsValidation () {
     return true;
 }
 
+// FINAL FORM VALIDATION CONDITIONS
+// Fetching with Event listener for the element of form (when user clicks)
+formSubmission.addEventListener('change', formFinalValidation);
 
+  // SET UP FUNCTION FOR ENABLING OR DISABLING SUBMISSION FORM
+  function enableSubmission () {
+    submitForm.disabled = false;
+    submitForm.style.opacity ='1';
+    submitForm.style.cursor = 'allowed';
+  }
+
+  // Check for all the conditions to validate the final submission
+  function formFinalValidation () {
+
+    if (firstNameValidation () 
+    && lastNameValidation () 
+    && emailValidation ()
+    && birthDateValidation ()
+    && locationsRadioBtnValidation ()
+    && termsConditionsValidation ())
+    {
+      
+      }
+    }
+
+    // SET UP FUNCTION FOR THANK YOU MESSAGE
+    function thanksMessage(){
+      formSubmission.style.display = "none";
+      thankYouMessage.style.display = "flex";
+    }
+    function thanksMessage(){
+      thankYouMessage.style.display = "";
+    }
+  
 
 
 
