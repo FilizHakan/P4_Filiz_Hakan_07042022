@@ -76,10 +76,9 @@ reservationForm.addEventListener("submit", (event) => validate(event))
 document.querySelector('form').addEventListener('submit', submitForm);
 
 // PREVENT BROWSER FROM DEFAULT BEHAVIOR (CHANGING PAGE ONCLICK)  
-function submit(elt)
-{
+function submit(elt){
   elt.preventDefault();
-
+}
 // FIRST NAME VALIDATION CHECK: 
 // Fetching with Event listener for the element first name
 firstName.addEventListener('input', firstNameValidation); 
@@ -182,7 +181,7 @@ function locationsRadioBtnValidation () {
     }
   }
 }
-}
+
 
 // TERMS AND CONDITIONS VALIDATION CHECK
 // Fetching with Event listener for the element of terms and conditions
