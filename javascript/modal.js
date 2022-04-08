@@ -125,3 +125,23 @@ email.addEventListener('input', emailValidation);
     hideErrorMessage(parent);
     return true;
   }}
+
+// BIRTHDATE:
+// Fetching with Event listener for the element birthdate
+birthDate.addEventListener('input', birthDateValidation); 
+
+// CONDITION: Date management for when user selects the dates + the current date
+const selectedBirthDate = new Date(data.birthDate);
+const currentDate = new Date(Date.now());
+
+  // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
+  function birthDateValidation () {
+    let parent = birthDate.closest('div');
+    showErrorMessage(parent);
+    if (birthRegex.test(reserve.birthDate.value) || (selectedDate > currentDate)) {
+      return false;
+    } 
+      hideErrorMessage(parent);
+      return true;
+  }
+
