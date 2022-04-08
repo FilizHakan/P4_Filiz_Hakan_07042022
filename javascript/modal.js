@@ -37,6 +37,7 @@ window.onclick = function(event) {
 }
 
 // DOM ELEMENTS - SAVE FOR EACH ELEMENT IN HTML
+const form = document.forms["reserve"];
 const formSubmission = document.querySelector('form');
 const modalBody = document.querySelector('.modal-body');
 const firstName = document.getElementById('first');
@@ -76,7 +77,7 @@ reservationForm.addEventListener("submit", (event) => validate(event))
 // Fetching with Event listener for the element submit
 document.querySelector('form').addEventListener('submit', submitForm);
 
-// CREATE THE 'FERMER' BUTTON WITH JAVASCRIPT
+// CREATE THE 'FERMER' BUTTON AFTER SUBMISSION WITH JAVASCRIPT
 function closeButton () {
   let button = document.createElement("button");
   button.innerHTML = "Fermer";
@@ -86,15 +87,12 @@ function closeButton () {
   }
 }
 
-// PREVENT BROWSER FROM DEFAULT BEHAVIOR (CHANGING PAGE ONCLICK)  
+// Fetching with Event listener for the element submit
+form.addEventListener("submit, submit");
+
+// FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK 
 function submit(elt){
   elt.preventDefault();
-  modalBody.innerHTML = ' ';
-  modalBody.style.display = "flex";
-  modalBody.style.height = "700px";
-  modalBody.style.flexdirection = "column";
-  thanksMessage();
-  closeButton();
 }
 
 // FIRST NAME VALIDATION CHECK: 
@@ -200,7 +198,6 @@ function locationsRadioBtnValidation () {
   }
 }
 
-
 // TERMS AND CONDITIONS VALIDATION CHECK
 // Fetching with Event listener for the element of terms and conditions
 termsConditionsCheckbox.addEventListener('change', termsConditionsValidation);
@@ -220,18 +217,15 @@ function termsConditionsValidation () {
 // Fetching with Event listener for the element of form (when user clicks)
 formSubmission.addEventListener('change', formFinalValidation);
 
-  // SET UP FUNCTION FOR ENABLING OR DISABLING SUBMISSION FORM
-  function enableSubmission () {
-    submitForm.disabled = false;
-    submitForm.style.opacity ='1';
-    submitForm.style.cursor = 'allowed';
+  // SET UP FUNCTION FOR THANK YOU MESSAGE
+  function showThanksMessage(){
+    form.style.display = "none";
+    thankYouMessage.style.display = "flex";
+  }
+  function hideThanksMessage(){
+    thankYouMessage.style.display = "";
   }
 
-    function disableSubmission () {
-      submitForm.disabled = true;
-      submitForm.style.opacity = '1';
-      submitForm.style.cursor = 'pointer';
-    }
   // Check for all the conditions to validate the final submission
   function formFinalValidation () {
 
@@ -242,21 +236,12 @@ formSubmission.addEventListener('change', formFinalValidation);
     && locationsRadioBtnValidation ()
     && termsConditionsValidation ())
     {
-      enableSubmission();
-      return true;
+      showThanksMessage();
       }
-      disableSubmission();
-      return false;
+      hideThanksMessage();
     }
 
-    // SET UP FUNCTION FOR THANK YOU MESSAGE
-    function thanksMessage(){
-      formSubmission.style.display = "none";
-      thankYouMessage.style.display = "flex";
-    }
-    function thanksMessage(){
-      thankYouMessage.style.display = "";
-    }
+    
   
 
 
