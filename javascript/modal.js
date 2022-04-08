@@ -58,61 +58,70 @@ const birthRegex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|
 
 
 // SET UP WITH "SETATTRIBUTE" SHOW ERROR MESSAGE
-function showError(elt) {
+function showErrorMessage(elt) {
   elt.setAttribute('data-error-message-visible', true);
 }
 
 // SET UP WITH "SETATTRIBUTE" HIDE ERROR MESSAGE
-function hideError(elt) {
+function hideErrorMessage(elt) {
   elt.setAttribute('data-error-message-visible', false)
 }
 
-// FIRST NAME: Fetching with Event listener for the element first name
+// SUBMIT FORM: 
+// Fetching with Event listener for the element submit
+document.querySelector('form').addEventListener('submit', submitForm);
+// PREVENT BROWSER FROM CHANGING PAGE
+function submit(elt)
+{
+  elt.preventDefault();
+
+// FIRST NAME: 
+// Fetching with Event listener for the element first name
 firstName.addEventListener('input', firstNameValidation); 
 
   // Check if first name strictly superior is between 2 and 20, and check the REGEX condition
   function firstNameValidation () {
     let parent = firstName.closest('div');
-    showError(parent);
+    showErrormessage(parent);
     if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false) {
       return false;
     }
     if (firstName.value.length > 20) {
     return false;
     }
-    hideError(parent);
+    hideErrorMessage(parent);
     return false;
   }
 
-// LAST NAME: Fetching with Event listener for the element last name
+// LAST NAME: 
+// Fetching with Event listener for the element last name
 lastName.addEventListener('input', lastNameValidation); 
 
   // Check if last name is empty or not with message + length must be strictly superior to 2
-  function firstNameValidation () {
-    let parent = firstName.closest('div');
-    showError(parent);
-    if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false) {
+  function lastNameValidation () {
+    let parent = lastName.closest('div');
+    showErrorMessage(parent);
+    if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false) {
       return false;
     }
-    if (firstName.value.length > 20) {
+    if (lastName.value.length > 20) {
     return false;
     }
-    hideError(parent);
+    hideErrorMessage(parent);
     return false;
   }
 
-// EMAIL ADDRESS: Fetching with Event listener for the element email
+// EMAIL ADDRESS: 
+// Fetching with Event listener for the element email
 email.addEventListener('input', emailValidation);
 
   // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
-  data.email === "" || !data.email.match(emailRegex) ? error.email = true : null;
-
- 
-
-
-
-
-
-
-
-
+  function emailValidation () {
+    let parent = email.closest('div');
+    showErrorMessage(parent);
+    if(emailRegex.test(reserve.email.value)) {
+      return false;
+    }
+    hideErrorMessage(parent);
+    return true;
+  }}
