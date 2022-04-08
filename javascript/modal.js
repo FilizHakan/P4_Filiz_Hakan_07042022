@@ -59,12 +59,12 @@ const birthRegex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|
 
 // SET UP WITH "SETATTRIBUTE" SHOW ERROR MESSAGE
 function showErrorMessage(elt) {
-  elt.setAttribute('data-error-message-visible', true);
+  elt.setAttribute('data-error-visible', true);
 }
 
 // SET UP WITH "SETATTRIBUTE" HIDE ERROR MESSAGE
 function hideErrorMessage(elt) {
-  elt.setAttribute('data-error-message-visible', false)
+  elt.setAttribute('data-error-visible', false)
 }
 
 // SUBMIT FORM: 
