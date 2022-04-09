@@ -51,8 +51,7 @@ const termsConditionsCheckbox = document.querySelector("input[name='conditions']
 const submitForm = document.getElementById('.btn-submit');
 
 // REGEX
-// Set a REGEX: Email address validation (must start with a string followed by '@', followed by another string)
-const mailRegex = !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
 // Set a REGEX: Name validation
 const nameRegex = /^[a-zA-Z-\s]+$/;
 // Set a REGEX: Birthdate validation
@@ -137,7 +136,8 @@ function closeButton () {
       if (email.value.length == 0) {
         return false;
       }
-      if (mailRegex.test(email.value)) { 
+      if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)) { // Set a REGEX: Email address validation (must start with a string followed by '@', followed by another string)
+
         return false;
       }
       hideErrorMessage(errorMsg);
