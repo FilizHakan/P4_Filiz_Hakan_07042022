@@ -73,7 +73,6 @@
                   id="first"
                   name="first"
                   minlength="2"
-                  required pattern="^[A-Za-z\-]+$"
                 /><br>
               </div>
               <div
@@ -85,22 +84,20 @@
                   id="last"
                   name="last"
                   minlength="2"
-                  required pattern="^[A-Za-z\-]+$"
                 /><br>
               </div>
               <div
-                class="formData" data-error="Veuillez entrer une adresse email valide.">
+                class="formData" data-error="Veuillez entrer un email valide.">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
-                  required
                 /><br>
               </div>
               <div
-                class="formData" data-error="Vous devez entrer votre date de naissance.">
+                class="formData" data-error="Veuillez entrer une date de naissance valide.">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -124,6 +121,7 @@
                   id="location1"
                   name="location"
                   value="New York"
+                  checked
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -193,10 +191,10 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  required
                   checked
+                  required
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
@@ -216,7 +214,8 @@
               />
             </form>
             <div class="thanks">
-              Merci ! Votre inscription a bien été reçue.
+              Merci ! <br>
+              Votre inscription a bien été reçue.
             </div>
           </div>
         </div>

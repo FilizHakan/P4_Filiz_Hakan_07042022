@@ -37,7 +37,7 @@ window.onclick = function(event) {
   }
 }
 
-// DOM ELEMENTS - SAVE FOR EACH ELEMENT IN HTML
+// DOM ELEMENTS - SAVE FOR EACH FIELD IN HTML
 const formSubmission = document.querySelector('form');
 const form = document.getElementsByName('reserve');
 const modalBody = document.querySelector('.modal-body');
@@ -49,14 +49,14 @@ const locationsRadioBtn = document.querySelectorAll("input[name='location']");
 const tournamentCounts = document.querySelector("input[type=number]");
 const termsConditionsCheckbox = document.querySelector("input[name='conditions']");
 const submitForm = document.getElementById('.btn-submit');
-const thankYouMessage = document.querySelector('.thanks');
+const thankYouMessage = document.getElementsByClassName('.thanks');
 
 // REGEX
-// Set a REGEX: Email address must start with a string followed by '@', followed by another string
-const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-// Set a REGEX: Name 
+// Set a REGEX: Email address validation (must start with a string followed by '@', followed by another string)
+const emailRegex = /^[A-Za-z]\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
+// Set a REGEX: Name validation
 const nameRegex = /^[a-zA-Z-\s]+$/;
-// Set a REGEX: Birthdate 
+// Set a REGEX: Birthdate validation
 const birthRegex = /^((19[3-9]+[0-9]|200[0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\d|3[01])|(0?[1-9]|[12]\d|3[01])[/](0?[1-9]|1[0-2])[/](19[3-9]+[0-9]|200[0-6]))$/;
 
 
@@ -103,7 +103,7 @@ function submitFormValidation(elt){
     function firstNameValidation () {
       let errorMsg = firstName.closest('.formData');
       showErrorMessage(errorMsg);
-      if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value === "")) {
+      if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value == 0)) {
         return false;
       }
       if (firstName.value.length > 20) {
@@ -121,10 +121,16 @@ function submitFormValidation(elt){
     function lastNameValidation () {
       let errorMsg = lastName.closest('.formData');
       showErrorMessage(errorMsg);
-      if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false || (lastName.value === "")) {
+      if (lastName.value.trim().length < 2) {
+        return false;
+      }
+      if (nameRegex.test(lastName.value) == false) {
         return false;
       }
       if (lastName.value.length > 20) {
+        return false;
+      }
+      if (lastName.value === '') {
         return false;
       }
       hideErrorMessage(errorMsg);
@@ -132,19 +138,22 @@ function submitFormValidation(elt){
     }
 
   // EMAIL ADDRESS VALIDATION CHECK: 
-  // Fetching with Event listener for the element email
-  email.addEventListener('input', emailValidation);
+  // Fetching with Event listener the element by Id
+    email.addEventListener('input', emailValidation);
 
     // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
     function emailValidation () {
       let errorMsg = email.closest('.formData');
       showErrorMessage(errorMsg);
-      if(emailRegex.test(reserve.email.value)) {
+      if (email.value.length == 0) {
         return false;
       }
-      hideErrorMessage(errorMsg);
+      if (!email.match(emailRegex)) {
         return true;
-  }
+      }
+      hideErrorMessage(errorMsg);
+      return true;
+    }
 
   // BIRTHDATE VALIDATION CHECK:
   // Fetching with Event listener for the element birthdate
@@ -158,7 +167,13 @@ function submitFormValidation(elt){
     function birthDateValidation () {
       let errorMsg = birthDate.closest('.formData');
       showErrorMessage(errorMsg);
-      if (birthRegex.test(reserve.birthDate.value) || (selectedBirthDate > currentDate)) {
+      if (birthDate.value.length == 0) {
+        return false;
+      }
+      if (!birthDate.match(birthRegex)) {
+        return false;
+      }
+      if (selectedBirthDate > currentDate) {
         return false;
       }
         hideErrorMessage(errorMsg);
@@ -173,7 +188,10 @@ function submitFormValidation(elt){
     function tournamentCountsValidation () {
       let errorMsg = tournamentCounts.closest('.formData');
       showErrorMessage(errorMsg);
-      if ((tournamentCounts.value > 98) || (tournamentCounts.value === "")){
+      if (tournamentCounts.value > 98) {
+        return false;
+      }
+      if (tournamentCounts.value === '') {
         return false;
       }
       hideErrorMessage(errorMsg);
@@ -209,13 +227,13 @@ function submitFormValidation(elt){
     if (!termsConditionsCheckbox.checked) {
       return false;
     }
-      hideErrorMessage(errorMsg);
+    hideErrorMessage(errorMsg);
       return true;
   }
 
   // FINAL FORM VALIDATION CONDITIONS
 
-    // SET UP FUNCTION FOR THANK YOU MESSAGE
+    // SET UP FUNCTION FOR FINAL THANK YOU MESSAGE AFTER SUBMISSION HAS BEEN COMPLETED
     function showThanksMessage(){
       form.style.display = "none";
       thanks.style.display = "flex";
@@ -223,16 +241,16 @@ function submitFormValidation(elt){
     function hideThanksMessage(){
       thanks.style.display = "";
     }
-
+    
     // Fetching with Event listener for the element of form (when user clicks)
     submitForm.addEventListener('click', function() {
 
     if (firstNameValidation () 
-    && lastNameValidation () 
-    && emailValidation ()
-    && birthDateValidation ()
-    && locationsRadioBtnValidation ()
-    && termsConditionsValidation ()){
+    && !lastNameValidation () 
+    && !emailValidation ()
+    && !birthDateValidation ()
+    && !locationsRadioBtnValidation ()
+    && !termsConditionsValidation ()){
       
       showThanksMessage();
     }else{
