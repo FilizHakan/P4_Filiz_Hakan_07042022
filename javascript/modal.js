@@ -13,6 +13,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalCloseBtn = document.getElementsByClassName('close');
 
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -37,8 +38,8 @@ window.onclick = function(event) {
 }
 
 // DOM ELEMENTS - SAVE FOR EACH ELEMENT IN HTML
-const form = document.forms["reserve"];
 const formSubmission = document.querySelector('form');
+const form = document.getElementsByName('reserve');
 const modalBody = document.querySelector('.modal-body');
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
@@ -89,12 +90,14 @@ function closeButton () {
 }
 
 // Fetching with Event listener for the element submit
-form.addEventListener("submit", submit);
+modalBody.addEventListener("submit", submitFormValidation);
 
 // FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK 
-function submit(elt){
+function submitFormValidation(elt){
   elt.preventDefault();
-
+  thankYouMessage();
+  closeButton();
+}
 
   // FIRST NAME VALIDATION CHECK: 
   // Fetching with Event listener for the element first name
@@ -103,7 +106,7 @@ function submit(elt){
     // Check if first name is strictly between 2 and 20, and check the REGEX condition
     function firstNameValidation () {
       let errorMsg = firstName.closest('.formData');
-      showErrormessage(errorMsg);
+      showErrorMessage(errorMsg);
       if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value === "")) {
         return false;
       }
@@ -219,10 +222,10 @@ function submit(elt){
     // SET UP FUNCTION FOR THANK YOU MESSAGE
     function showThanksMessage(){
       form.style.display = "none";
-      thankYouMessage.style.display = "flex";
+      thanks.style.display = "flex";
     }
     function hideThanksMessage(){
-      thankYouMessage.style.display = "";
+      thanks.style.display = "";
     }
 
     // Fetching with Event listener for the element of form (when user clicks)
@@ -240,10 +243,6 @@ function submit(elt){
       hideThanksMessage();
       } 
   });
-
-}
-    
-
     
   
 
