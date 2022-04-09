@@ -81,6 +81,7 @@ formSubmission.addEventListener('submit', submitForm);
 function closeButton () {
   let button = document.createElement("button");
   button.innerHTML = "Fermer";
+  button.className = "btn-submit";
   modalBody.appendChild(button);
   button.onclick = function () {
     modalbg.style.display = "none";
