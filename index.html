@@ -59,7 +59,6 @@
           <span class="close"></span>
           <div class="modal-body">
             <form
-              id="ReservationForm"
               name="reserve"
               action="index.html"
               method="get"
@@ -74,7 +73,7 @@
                   id="first"
                   name="first"
                   minlength="2"
-                  required
+                  required pattern="^[A-Za-z\-]+$"
                 /><br>
               </div>
               <div

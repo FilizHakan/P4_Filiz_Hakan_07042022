@@ -67,12 +67,8 @@ function showErrorMessage(elt) {
 
 // SET UP WITH "SETATTRIBUTE" HIDE ERROR MESSAGE
 function hideErrorMessage(elt) {
-  elt.setAttribute('data-error-visible', false)
+  elt.setAttribute('data-error-visible', false);
 }
-
-// SET UP TO VALIDATE THE RESERVATION FORM
-const reservationForm = document.getElementById("reservationForm");
-reservationForm.addEventListener("submit", (event) => validate(event))
 
 // SUBMIT FORM: 
 // Fetching with Event listener for the element submit
@@ -206,7 +202,7 @@ function submitFormValidation(elt){
   // Fetch with event listener the element checkbox "terms and conditions"
   termsConditionsCheckbox.addEventListener('change', termsConditionsValidation);
 
-  // Check if the checkbox "terms and conditions" is checked
+  // Check if the checkbox "terms and conditions" is checked, otherwise the submission is not valid
   function termsConditionsValidation () {
     let errorMsg = termsConditionsCheckbox.closest(".formData");
     showErrorMessage(errorMsg);
@@ -239,7 +235,7 @@ function submitFormValidation(elt){
     && termsConditionsValidation ()){
       
       showThanksMessage();
-      }else{
+    }else{
       hideThanksMessage();
       } 
   });
