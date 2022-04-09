@@ -154,6 +154,7 @@ main {
   text-align: center;
   width: 100%;
   height: 700px;
+  margin-bottom: 200px;
 }
 
 .footer {
@@ -215,7 +216,7 @@ main {
 
 label {
   font-family: var(--font-default);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
@@ -435,7 +436,8 @@ input[data-error]::after {
 /* custom select end */
 .text-label {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 15px;
+  padding-left: 0;
 }
 .hero-section {
   min-height: 93vh;

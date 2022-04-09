@@ -87,7 +87,7 @@
                 /><br>
               </div>
               <div
-                class="formData" data-error="Veuillez entrer un email valide.">
+                class="formData" data-error="Veuillez entrer une adresse email valide.">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -110,18 +110,17 @@
               <div
                 class="formData" data-error="Veuillez saisir une valeur numérique entre 0 et 99.">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="tournament-counts" name="quantity" min="0" max="99" required>
+                <input type="number" class="text-control" id="tournament-counts" name="quantity" min="0" max="99">
               </div>
               <p class="text-label" for="quantity">À quel tournoi souhaitez-vous participer cette année ?</p>
               <div
-                class="formData" data-error="Veuillez choisir un lieu">
+                class="formData" data-error="Veuillez choisir une option.">
                 <input
                   class="checkbox-input"
                   type="radio"
                   id="location1"
                   name="location"
                   value="New York"
-                  checked
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -213,10 +212,10 @@
                 value="C'est parti"
               />
             </form>
-            <div class="thanks">
+            <p class="thanks">
               Merci ! <br>
               Votre inscription a bien été reçue.
-            </div>
+            </p>
           </div>
         </div>
       </div>
