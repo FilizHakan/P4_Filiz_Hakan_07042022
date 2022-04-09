@@ -44,12 +44,7 @@ const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthDate = document.getElementById('birthdate');
-const newYork = document.getElementById("location1");
-const sanFrancisco = document.getElementById("location2");
-const seattle = document.getElementById("location3");
-const chicago = document.getElementById("location4");
-const boston = document.getElementById("location5");
-const portland = document.getElementById("location6");
+const locationsRadioBtn = document.querySelectorAll("input[name='location']");
 const tournamentCounts = document.querySelector("input[type=number]");
 const termsConditionsCheckbox = document.querySelector("input[name='conditions']");
 const submitForm = document.getElementById('.btn-submit');
@@ -106,15 +101,15 @@ function submit(elt){
 
     // Check if first name is strictly between 2 and 20, and check the REGEX condition
     function firstNameValidation () {
-      let parent = firstName.closest('.formData');
-      showErrormessage(parent);
+      let errorMsg = firstName.closest('.formData');
+      showErrormessage(errorMsg);
       if ((firstName.value.trim().length < 2) || nameRegex.test(firstName.value) == false || (firstName.value === "")) {
         return false;
       }
       if (firstName.value.length > 20) {
         return false;
       }
-      hideErrorMessage(parent);
+      hideErrorMessage(errorMsg);
         return false;
     }
 
@@ -124,15 +119,15 @@ function submit(elt){
 
     // Check if last name is empty or not with message + length must be strictly superior to 2
     function lastNameValidation () {
-      let parent = lastName.closest('.formData');
-      showErrorMessage(parent);
+      let errorMsg = lastName.closest('.formData');
+      showErrorMessage(errorMsg);
       if ((lastName.value.trim().length < 2) || nameRegex.test(lastName.value) == false || (lastName.value === "")) {
         return false;
       }
       if (lastName.value.length > 20) {
         return false;
       }
-      hideErrorMessage(parent);
+      hideErrorMessage(errorMsg);
         return false;
     }
 
@@ -142,12 +137,12 @@ function submit(elt){
 
     // Check if Email is not empty + must be following the validation REGEX we have created above (format ...@...)
     function emailValidation () {
-      let parent = email.closest('.formData');
-      showErrorMessage(parent);
+      let errorMsg = email.closest('.formData');
+      showErrorMessage(errorMsg);
       if(emailRegex.test(reserve.email.value)) {
         return false;
       }
-      hideErrorMessage(parent);
+      hideErrorMessage(errorMsg);
         return true;
   }
 
@@ -161,12 +156,12 @@ function submit(elt){
 
     // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
     function birthDateValidation () {
-      let parent = birthDate.closest('.formData');
-      showErrorMessage(parent);
+      let errorMsg = birthDate.closest('.formData');
+      showErrorMessage(errorMsg);
       if (birthRegex.test(reserve.birthDate.value) || (selectedBirthDate > currentDate)) {
         return false;
       }
-        hideErrorMessage(parent);
+        hideErrorMessage(errorMsg);
         return true;
     }
 
@@ -176,32 +171,45 @@ function submit(elt){
 
     // Check if tournament counts is checked and validated
     function tournamentCountsValidation () {
-      let parent = tournamentCounts.closest('.formData');
-      showErrorMessage(parent);
+      let errorMsg = tournamentCounts.closest('.formData');
+      showErrorMessage(errorMsg);
       if ((tournamentCounts.value > 98) || (tournamentCounts.value === "")){
         return false;
       }
-      hideErrorMessage(parent);
+      hideErrorMessage(errorMsg);
         return true;
     }
 
   // RADIO BUTTON FOR CITY TOURNAMENT VALIDATION CHECK:
-  // Check if location 1 is checked and validated
-      if ((newYork.checked) || (sanFrancisco.checked) || (seattle.checked) || (chicago.checked) || (boston.checked) || (portland.checked)) {
-        hideErrorMessage(location1)
-      }else{
-        showErrorMessage(location1)
+  // Fetching with Event listener for the element of location
+  for(radioBtn of locationsRadioBtn) {
+    radioBtn.addEventListener('change', locationsRadioBtnValidation);
+  }
+
+  // Check if one of the locations are checked 
+  function locationsRadioBtnValidation () {
+    let errorMsg = radioBtn.closest('.formData');
+    showErrorMessage(errorMsg);
+    for (radioBtn of locationsRadioBtn) {
+      if (radioBtn.checked) {
+        hideErrorMessage(errorMsg);
+        return true;
       }
-    
+    }
+  }
 
   // TERMS AND CONDITIONS VALIDATION CHECK
+  // Fetch with event listener the element checkbox "terms and conditions"
+  termsConditionsCheckbox.addEventListener('change', termsConditionsValidation);
+
+  // Check if the checkbox "terms and conditions" is checked
   function termsConditionsValidation () {
-    let parent = termsConditionsCheckbox.closest(".formData");
-    showErrorMessage(parent);
+    let errorMsg = termsConditionsCheckbox.closest(".formData");
+    showErrorMessage(errorMsg);
     if (!termsConditionsCheckbox.checked) {
       return false;
     }
-      hideErrorMessage(parent);
+      hideErrorMessage(errorMsg);
       return true;
   }
 
@@ -223,7 +231,7 @@ function submit(elt){
     && lastNameValidation () 
     && emailValidation ()
     && birthDateValidation ()
-    && ((newYork.checked) || (sanFrancisco.checked) || (seattle.checked) || (chicago.checked) || (boston.checked) || (portland.checked))
+    && locationsRadioBtnValidation ()
     && termsConditionsValidation ()){
       
       showThanksMessage();
