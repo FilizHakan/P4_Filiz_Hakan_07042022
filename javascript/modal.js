@@ -49,13 +49,14 @@ const locationsRadioBtn = document.querySelectorAll("input[name='location']");
 const tournamentCounts = document.querySelector("input[name='quantity']");
 const termsConditionsCheckbox = document.querySelector("input[name='conditions']");
 const submitForm = document.getElementById('.btn-submit');
-const thankYouMessage = document.getElementsByClassName('.thanks');
 
 // REGEX
+// Set a REGEX: Email address validation (must start with a string followed by '@', followed by another string)
+const mailRegex = !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 // Set a REGEX: Name validation
-const nameRegex = /^[a-zA-Z-\s]+$/ ;
+const nameRegex = /^[a-zA-Z-\s]+$/;
 // Set a REGEX: Birthdate validation
-const birthRegex = !/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/ ;
+const birthRegex = !/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 
 
 // SET UP WITH "SETATTRIBUTE" SHOW ERROR MESSAGE
@@ -136,8 +137,7 @@ function closeButton () {
       if (email.value.length == 0) {
         return false;
       }
-      if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)) { // Set a REGEX: Email address validation (must start with a string followed by '@', followed by another string)
-
+      if (mailRegex.test(email.value)) { 
         return false;
       }
       hideErrorMessage(errorMsg);
@@ -156,10 +156,7 @@ function closeButton () {
     function birthDateValidation () {
       let errorMsg = birthDate.closest('.formData');
       showErrorMessage(errorMsg);
-      if (birthDate.value.length === '') {
-        return false;
-      }
-      if (!/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(birthDate.value)) {
+      if (birthRegex.test(birthDate.value)) {
         return false;
       }
       if (selectedBirthDate > currentDate) {
@@ -177,10 +174,7 @@ function closeButton () {
     function tournamentCountsValidation () {
       let errorMsg = tournamentCounts.closest('.formData');
       showErrorMessage(errorMsg);
-      if (tournamentCounts.value < '0') {
-        return false;
-      }
-      if (tournamentCounts.value.lentgh === '') {
+      if ((tournamentCounts.value < '0') || (tournamentCounts.value === '')) {
         return false;
       }
       hideErrorMessage(errorMsg);
@@ -225,17 +219,17 @@ function closeButton () {
     // SET UP FUNCTION FOR FINAL THANK YOU MESSAGE AFTER SUBMISSION HAS BEEN COMPLETED
     function showThanksMessage(){
       form.style.display = "none";
-      thanks.style.display = "flex";
+      thanksMessage.style.display = "flex";
     }
     function hideThanksMessage(){
-      thanks.style.display = "";
+      thanksMessage.style.display = "";
     }
 
     // Fetching with Event listener for the element of form (when user clicks)
     submitSubmission.addEventListener('change', formValidation);
 
     function formValidation () {
-    if (firstNameValidation () 
+    if (!firstNameValidation () 
       && !lastNameValidation () 
       && !emailValidation ()
       && !birthDateValidation ()
@@ -243,22 +237,31 @@ function closeButton () {
       && !termsConditionsValidation ())
         {
         showThanksMessage();
-          return true;
-        
         }else{
         hideThanksMessage();
-          return false;
         }
     }
 
 // Fetching with Event listener for the element submit
-modalBody.addEventListener("submit", submitFormValidation);
+formSubmission.addEventListener("submit", submitFormValidation);
 
 // FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK 
 function submitFormValidation(elt){
   elt.preventDefault();
-  thankYouMessage();
+  modalBody.style.flexDirection = "column";
+  modalBody.style.justifyContent = "flex-end";
+  document.querySelector('.modal-body').innerHTML = " ";
+  modalBody.style.height = "700px";
+  modalBody.style.display = "flex";
+  thanksMessage();
   closeButton();
+}
+
+function thanksMessage() {
+  let thankYou = document.createElement('div');
+  thankYou.innerText = 'Merci pour votre inscription !';              
+  thankYou.style.marginBottom = '180px';
+  modalBody.appendChild(thankYou);
 }
   
 
