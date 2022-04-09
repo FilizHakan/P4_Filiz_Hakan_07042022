@@ -51,11 +51,9 @@ const termsConditionsCheckbox = document.querySelector("input[name='conditions']
 const submitForm = document.getElementById('.btn-submit');
 
 // REGEX
-
 // Set a REGEX: Name validation
 const nameRegex = /^[a-zA-Z-\s]+$/;
-// Set a REGEX: Birthdate validation
-const birthRegex = !/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+
 
 
 // SET UP WITH "SETATTRIBUTE" SHOW ERROR MESSAGE
@@ -148,18 +146,16 @@ function closeButton () {
   // Fetching with Event listener for the element birthdate
   birthDate.addEventListener('input', birthDateValidation); 
 
-  // CONDITION: Date management for when user selects the dates + the current date
-  const selectedBirthDate = new Date(data.birthDate);
-  const currentDate = new Date(Date.now());
+  // CONDITION: Date management for when user selects the dates + the current date (not go beyond)
+  const birthData = birthDate.value;
+  const selectedBirthDate = new Date(birthData);
+  const currentDate = new Date();
 
     // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
     function birthDateValidation () {
       let errorMsg = birthDate.closest('.formData');
       showErrorMessage(errorMsg);
-      if (birthRegex.test(birthDate.value)) {
-        return false;
-      }
-      if (selectedBirthDate > currentDate) {
+      if (!/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(birthData) || (selectedBirthDate > currentDate)) { // Set a REGEX: Birthdate validation and date not exceeding current date
         return false;
       }
         hideErrorMessage(errorMsg);
@@ -182,7 +178,7 @@ function closeButton () {
     }
 
   // RADIO BUTTON FOR CITY TOURNAMENT VALIDATION CHECK:
-  // Fetching with Event listener for the element of location
+  // Fetching with Event listener (with "for...of": to get one of the radio options checked) for the element of location
   for(radioBtn of locationsRadioBtn) {
     radioBtn.addEventListener('change', locationsRadioBtnValidation);
   }
@@ -245,7 +241,7 @@ function closeButton () {
 // Fetching with Event listener for the element submit
 formSubmission.addEventListener("submit", submitFormValidation);
 
-// FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK 
+// FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK AND CREATE THE LAYOUT FOR THE THANK YOU MESSAGE
 function submitFormValidation(elt){
   elt.preventDefault();
   document.querySelector('.modal-body').innerHTML = " ";
@@ -257,13 +253,14 @@ function submitFormValidation(elt){
   closeButton();
 }
 
+// FUNCTION TO CREATE AND MAKE APPEAR THE THANK YOU TEXT
 function thanksMessage() {
-  let thankYou = document.createElement('div');
-  thankYou.innerText = 'Merci pour votre inscription !'; 
-  thankYou.style.width = '100%';  
-  thankYou.style.textAlign = 'center';           
-  thankYou.style.marginBottom = '180px';
-  modalBody.appendChild(thankYou);
+  let thankYou = document.createElement('div'); //Create a <div> to integrate a the "thank you" message
+  thankYou.innerText = 'Merci pour votre inscription !'; // Integrate the message down in the <div> with innerText
+  thankYou.style.width = '100%';  // Set the width of the text to 100%
+  thankYou.style.textAlign = 'center'; // Set the text to center with the "text-align" property           
+  thankYou.style.marginBottom = '180px'; // Set the text margin bottom to 180px
+  modalBody.appendChild(thankYou); // Add the variable "thankYou" created above to create a child of "modalBody" set in the beginning
 }
   
 
