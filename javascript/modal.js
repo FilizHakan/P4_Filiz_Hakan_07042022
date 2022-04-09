@@ -248,9 +248,9 @@ formSubmission.addEventListener("submit", submitFormValidation);
 // FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK 
 function submitFormValidation(elt){
   elt.preventDefault();
-  modalBody.style.flexDirection = "column";
-  modalBody.style.justifyContent = "flex-end";
   document.querySelector('.modal-body').innerHTML = " ";
+  modalBody.style.flexDirection = "column";
+  modalBody.style.justifyContent = "center";
   modalBody.style.height = "700px";
   modalBody.style.display = "flex";
   thanksMessage();
@@ -259,7 +259,9 @@ function submitFormValidation(elt){
 
 function thanksMessage() {
   let thankYou = document.createElement('div');
-  thankYou.innerText = 'Merci pour votre inscription !';              
+  thankYou.innerText = 'Merci pour votre inscription !'; 
+  thankYou.style.width = '100%';  
+  thankYou.style.textAlign = 'center';           
   thankYou.style.marginBottom = '180px';
   modalBody.appendChild(thankYou);
 }
