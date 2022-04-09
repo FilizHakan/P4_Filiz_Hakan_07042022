@@ -110,7 +110,7 @@ function submitFormValidation(elt){
         return false;
       }
       hideErrorMessage(errorMsg);
-        return false;
+        return true;
     }
 
   // LAST NAME VALIDATION CHECK: 
@@ -128,7 +128,7 @@ function submitFormValidation(elt){
         return false;
       }
       hideErrorMessage(errorMsg);
-        return false;
+        return true;
     }
 
   // EMAIL ADDRESS VALIDATION CHECK: 
