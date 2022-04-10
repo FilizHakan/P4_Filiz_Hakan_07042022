@@ -22,7 +22,7 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// CLOSE MODAL EVENT
+// Close modal event
   modalCloseBtn[0].addEventListener('click', closeModal);
 
 // Close modal form with the button cross (modal disappears on click)
@@ -37,18 +37,17 @@ window.onclick = function(event) {
   }
 }
 
-// DOM ELEMENTS - SAVE FOR EACH FIELD IN HTML
+// DOM ELEMENTS - SET CONST FOR EACH FIELD IN HTML
 const formSubmission = document.querySelector('form');
-const form = document.getElementsByName('reserve');
 const modalBody = document.querySelector('.modal-body');
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthDate = document.getElementById('birthdate');
 const locationsRadioBtn = document.querySelectorAll("input[name='location']");
-const tournamentCounts = document.querySelector("input[name='quantity']");
+const tournamentCounts = document.getElementById('tournament-counts');
 const termsConditionsCheckbox = document.querySelector("input[name='conditions']");
-const submitForm = document.getElementById('.btn-submit');
+const submitFormBtn = document.getElementById('btn-submit');
 
 // REGEX
 // Set a REGEX: Name validation
@@ -63,10 +62,6 @@ function showErrorMessage(elt) {
 function hideErrorMessage(elt) {
   elt.setAttribute('data-error-visible', false);
 }
-
-// SUBMIT FORM: 
-// Fetching with Event listener for the element submit
-formSubmission.addEventListener('submit', submitForm);
 
   // FIRST NAME VALIDATION CHECK: 
   // Fetching with Event listener for the element first name
@@ -126,7 +121,7 @@ formSubmission.addEventListener('submit', submitForm);
         return false;
       }
       hideErrorMessage(errorMsg);
-      return true;
+        return true;
     }
 
   // BIRTHDATE VALIDATION CHECK:
@@ -134,19 +129,20 @@ formSubmission.addEventListener('submit', submitForm);
   birthDate.addEventListener('input', birthDateValidation); 
 
   // CONDITION: Date management for when user selects the dates + the current date (not go beyond)
-  const birthData = birthDate.value;
-  const selectedBirthDate = new Date(birthData);
-  const currentDate = new Date();
+  const selectedBirthDate = new Date(birthDate.value);
+  const currentDate = new Date(Date.now());
 
     // Check if birthdate is not empty + must be following the validation REGEX we have created above (format ...@...)
     function birthDateValidation () {
       let errorMsg = birthDate.closest('.formData');
       showErrorMessage(errorMsg);
-      if (!/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(birthData) || (selectedBirthDate > currentDate)) { // Set a REGEX: Birthdate validation and date not exceeding current date
-        return false;
+      if (!/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(birthdate.value) // Set a REGEX: Birthdate validation
+      || (selectedBirthDate > currentDate) // If the selected DOB is greater than the current date
+      || (selectedBirthDate.getFullYear() > currentDate.getFullYear() - 16)) { // User must be 16 years of age or above
+        return false; // If one OR the other above conditions are met, the message error will appear
       }
-      hideErrorMessage(errorMsg);
-        return true;
+      hideErrorMessage(errorMsg); 
+        return true; // otherwise, the error message won't be showing
     }
 
   // TOURNAMENT NUMBER VALIDATION CHECK:
@@ -157,7 +153,7 @@ formSubmission.addEventListener('submit', submitForm);
     function tournamentCountsValidation () {
       let errorMsg = tournamentCounts.closest('.formData');
       showErrorMessage(errorMsg);
-      if ((tournamentCounts.value < '0') || (tournamentCounts.value === '')) {
+      if ((tournamentCounts.value > 99) || (tournamentCounts.value < '0') || (tournamentCounts.value.length === '')) {
         return false;
       }
       hideErrorMessage(errorMsg);
@@ -175,7 +171,7 @@ formSubmission.addEventListener('submit', submitForm);
     let errorMsg = radioBtn.closest('.formData');
     showErrorMessage(errorMsg);
     for (radioBtn of locationsRadioBtn) {
-      if (radioBtn.checked) {
+      if (!radioBtn.checked) {
         hideErrorMessage(errorMsg);
         return true;
       }
@@ -199,54 +195,61 @@ formSubmission.addEventListener('submit', submitForm);
 
   // FINAL FORM VALIDATION CONDITIONS
 
-    // SET UP FUNCTION FOR FINAL THANK YOU MESSAGE AFTER SUBMISSION HAS BEEN COMPLETED
-    function showThanksMessage(){
-      form.style.display = "none";
-      thanksMessage.style.display = "flex";
-    }
-    function hideThanksMessage(){
-      thanksMessage.style.display = "";
+    // SET UP FUNCTION FOR ENABLED OR DISABLED SUBMIT FORM BUTTON
+    disabledBtn();
+    function enabledBtn () {
+      submitFormBtn.disabled = false;
+      submitFormBtn.style.opacity = '1';
+      submitFormBtn.style.cursor = 'pointer';
     }
 
-    // SET UP FUNCTION FOR ENABLED AND DISABLED BUTTON 
-    function disabledFormBtn () {
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '1';
-      submitBtn.style.cursor = 'allowed';
-    }
-    
-    function enabledFormBtn () {
-      submitForm.disabled = false;
-      submitForm.style.opacity = '1';
-      submitForm.style.cursor = 'pointer';
+    function disabledBtn () {
+      submitFormBtn.disabled = true;
+      submitFormBtn.style.opacity = '1';
+      submitFormBtn.style.cursor = 'allowed';
     }
   
 
-    // Fetching with Event listener for the element of form (when user clicks)
-    submitSubmission.addEventListener('change', formValidation);
+    // Fetching with Event listener the conditions to validate the form when user clicks in the button
+    formSubmission.addEventListener('change', formConditionValidation);
 
-    function formValidation () {
+    function formConditionValidation () {
     if (firstNameValidation () 
       && lastNameValidation () 
       && emailValidation ()
       && birthDateValidation ()
+      && tournamentCountsValidation ()
       && locationsRadioBtnValidation ()
-      && termsConditionsValidation ())
-        {
-        diabledFormBtn ();
-          return false;
-        }
-        enabledFormBtn ();
+      && termsConditionsValidation ()) 
+      {
+        enabledBtn ();
           return true;
+        }
+        disabledBtn ();
+          return false;
     }
+
+// FUNCTION TO CREATE AND MAKE APPEAR THE THANK YOU TEXT
+function thanksMessage() {
+  let thankYou = document.createElement("div"); //Create a <div> to integrate a the "thank you" message
+  thankYou.innerText = 'Merci pour votre inscription !'; // Integrate the message down in the <div> with innerText
+  thankYou.style.width = '100%';  // Set the width of the text to 100%
+  thankYou.style.justifyContent = "center"; // Set the content to center
+  thankYou.style.textAlign = 'center'; // Set the text to center with the "text-align" property           
+  thankYou.style.marginTop = '16px'; // Set the text margin top to 16px
+  thankYou.style.marginBottom = '16px'; // Set the text margin bottom to 16px
+  modalBody.appendChild(thankYou); // Add a text node for the new div 
+}
 
 // CREATE THE 'FERMER' BUTTON AFTER SUBMISSION WITH JAVASCRIPT
 function closeButton () {
-  let buttonFermer = document.createElement("button");
-  buttonFermer.innerHTML = "Fermer";
-  buttonFermer.className = "btn-submit";
-  modalBody.appendChild(button);
-  buttonFermer.onclick = function () {
+  let buttonFermer = document.createElement("button"); // Create a new HTML tag <button>
+  buttonFermer.innerHTML = "Fermer"; // The new button will be called "Fermer"
+  buttonFermer.style.marginTop = '24px'; // Its margin-top is set at 24px
+  buttonFermer.classList.add("button"); // Add name class="button" (as in HTML)
+  buttonFermer.classList.add("btn-submit"); // Add name class="btn-submit" (as in HTML)
+  modalBody.appendChild(button); // Add a new button node in the "modal-body"
+  buttonFermer.onclick = function () { // Function "onclick" allows the new button to be close by the user (disappear with display: none)
     modalbg.style.display = "none";
   }
 }
@@ -257,31 +260,15 @@ formSubmission.addEventListener("submit", submitFormValidation);
 // FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK AND CREATE THE LAYOUT FOR THE THANK YOU MESSAGE
 function submitFormValidation(elt){
   elt.preventDefault();
-  document.querySelector('.modal-body').innerHTML = " ";
+  modalBody.innerHTML = " ";
   modalBody.style.flexDirection = "column";
-  modalBody.style.justifyContent = "center";
+  modalBody.style.justifyContent = "flex-end";
   modalBody.style.height = "700px";
   modalBody.style.display = "flex";
   thanksMessage();
   closeButton();
 }
 
-// FUNCTION TO CREATE AND MAKE APPEAR THE THANK YOU TEXT
-function thanksMessage() {
-  let thankYou = document.createElement('div'); //Create a <div> to integrate a the "thank you" message
-  thankYou.innerText = 'Merci pour votre inscription !'; // Integrate the message down in the <div> with innerText
-  thankYou.style.width = '100%';  // Set the width of the text to 100%
-  thankYou.style.textAlign = 'center'; // Set the text to center with the "text-align" property           
-  thankYou.style.marginBottom = '180px'; // Set the text margin bottom to 180px
-  modalBody.appendChild(thankYou); 
-}
-  
-
-          
-     
-  
-    
-  
 
 
 

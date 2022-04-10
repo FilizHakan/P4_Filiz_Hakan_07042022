@@ -111,7 +111,7 @@
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="tournament-counts" name="quantity" min="0" max="99">
               </div>
-              <p class="text-label" for="quantity">À quel tournoi souhaitez-vous participer cette année ?</p>
+              <p class="text-label">À quel tournoi souhaitez-vous participer cette année ?</p>
               <div
                 class="formData" data-error="Veuillez choisir une option.">
                 <input
@@ -190,7 +190,6 @@
                   type="checkbox"
                   id="checkbox1"
                   checked
-                  required
                 />
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
@@ -206,9 +205,10 @@
               </div>
               <input
                 class="btn-submit"
-                type="submit"
                 class="button"
+                type="submit"
                 value="C'est parti"
+                id="btn-submit"
               />
             </form>
           </div>
