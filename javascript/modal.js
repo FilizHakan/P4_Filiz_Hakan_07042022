@@ -54,8 +54,6 @@ const submitForm = document.getElementById('.btn-submit');
 // Set a REGEX: Name validation
 const nameRegex = /^[a-zA-Z-\s]+$/;
 
-
-
 // SET UP WITH "SETATTRIBUTE" SHOW ERROR MESSAGE
 function showErrorMessage(elt) {
   elt.setAttribute('data-error-visible', true);
@@ -69,17 +67,6 @@ function hideErrorMessage(elt) {
 // SUBMIT FORM: 
 // Fetching with Event listener for the element submit
 formSubmission.addEventListener('submit', submitForm);
-
-// CREATE THE 'FERMER' BUTTON AFTER SUBMISSION WITH JAVASCRIPT
-function closeButton () {
-  let button = document.createElement("button");
-  button.innerHTML = "Fermer";
-  button.className = "btn-submit";
-  modalBody.appendChild(button);
-  button.onclick = function () {
-    modalbg.style.display = "none";
-  }
-}
 
   // FIRST NAME VALIDATION CHECK: 
   // Fetching with Event listener for the element first name
@@ -158,7 +145,7 @@ function closeButton () {
       if (!/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(birthData) || (selectedBirthDate > currentDate)) { // Set a REGEX: Birthdate validation and date not exceeding current date
         return false;
       }
-        hideErrorMessage(errorMsg);
+      hideErrorMessage(errorMsg);
         return true;
     }
 
@@ -221,22 +208,48 @@ function closeButton () {
       thanksMessage.style.display = "";
     }
 
+    // SET UP FUNCTION FOR ENABLED AND DISABLED BUTTON 
+    function disabledFormBtn () {
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor = 'allowed';
+    }
+    
+    function enabledFormBtn () {
+      submitForm.disabled = false;
+      submitForm.style.opacity = '1';
+      submitForm.style.cursor = 'pointer';
+    }
+  
+
     // Fetching with Event listener for the element of form (when user clicks)
     submitSubmission.addEventListener('change', formValidation);
 
     function formValidation () {
-    if (!firstNameValidation () 
-      && !lastNameValidation () 
-      && !emailValidation ()
-      && !birthDateValidation ()
-      && !locationsRadioBtnValidation ()
-      && !termsConditionsValidation ())
+    if (firstNameValidation () 
+      && lastNameValidation () 
+      && emailValidation ()
+      && birthDateValidation ()
+      && locationsRadioBtnValidation ()
+      && termsConditionsValidation ())
         {
-        showThanksMessage();
-        }else{
-        hideThanksMessage();
+        diabledFormBtn ();
+          return false;
         }
+        enabledFormBtn ();
+          return true;
     }
+
+// CREATE THE 'FERMER' BUTTON AFTER SUBMISSION WITH JAVASCRIPT
+function closeButton () {
+  let buttonFermer = document.createElement("button");
+  buttonFermer.innerHTML = "Fermer";
+  buttonFermer.className = "btn-submit";
+  modalBody.appendChild(button);
+  buttonFermer.onclick = function () {
+    modalbg.style.display = "none";
+  }
+}
 
 // Fetching with Event listener for the element submit
 formSubmission.addEventListener("submit", submitFormValidation);
@@ -260,7 +273,7 @@ function thanksMessage() {
   thankYou.style.width = '100%';  // Set the width of the text to 100%
   thankYou.style.textAlign = 'center'; // Set the text to center with the "text-align" property           
   thankYou.style.marginBottom = '180px'; // Set the text margin bottom to 180px
-  modalBody.appendChild(thankYou); // Add the variable "thankYou" created above to create a child of "modalBody" set in the beginning
+  modalBody.appendChild(thankYou); 
 }
   
 
