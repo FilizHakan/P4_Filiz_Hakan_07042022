@@ -20,8 +20,7 @@
     </div>
     <div class="main-navbar">
       
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
+      <a href="#" class="active"><span>Détails de l'évènement</span></a>
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
       <a href="#"><span>Évènements passés</span></a>
@@ -57,15 +56,19 @@
       <div class="bground">
         <div class="content">
           <span class="close"></span>
-          <div class="modal-body">
+          <div class="thanks">
+            <p class="text-thanks">Merci pour<br>votre inscription !</p>
+            <input class="btn-thanks" type="button" class="button" value="Fermer" />
+          </div>
+          <div class="modal-body"> 
             <form
               name="reserve"
+              id="reserve"
               action="index.html"
               method="get"
               onsubmit="return validate();"
             >
-              <div
-                class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom.">
+              <div class="formData">
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
@@ -74,9 +77,11 @@
                   name="first"
                   minlength="2"
                 /><br>
+                <span class="error">
+                  <p id="first_error"></p>
+                </span>
               </div>
-              <div
-                class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du nom.">
+              <div class="formData">
                 <label for="last">Nom</label><br>
                 <input
                   class="text-control"
@@ -85,9 +90,12 @@
                   name="last"
                   minlength="2"
                 /><br>
+                <span class="error">
+                  <p id="last_error"></p>
+                </span>
               </div>
               <div
-                class="formData" data-error="Veuillez entrer une adresse email valide.">
+                class="formData">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -95,9 +103,12 @@
                   id="email"
                   name="email"
                 /><br>
+                <span class="error">
+                  <p id="email_error"></p>
+                </span>
               </div>
               <div
-                class="formData" data-error="Veuillez entrer une date de naissance valide.">
+                class="formData">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -105,15 +116,21 @@
                   id="birthdate"
                   name="birthdate"
                 /><br>
+                <span class="error">
+                  <p id="birth_error"></p>
+                </span>
               </div>
               <div
-                class="formData" data-error="Veuillez saisir une valeur numérique entre 0 et 99.">
+                class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="tournament-counts" name="quantity" min="0" max="99">
+                <span class="error">
+                  <p id="tournament_error"></p>
+                </span>
               </div>
               <p class="text-label">À quel tournoi souhaitez-vous participer cette année ?</p>
               <div
-                class="formData" data-error="Veuillez choisir une option.">
+                class="formData">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -180,21 +197,28 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
+                <span class="error">
+                  <p id="location_error"></p>
+                </span>
               </div>
 
               <div
-                class="formData" data-error="Veuillez cocher les termes et conditions d'utilisation."
+                class="formData"
                 >
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
                   checked
+                  required
                 />
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
+                <span class="error">
+                  <p id="condition_error"></p>
+                </span>
                 <br>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">

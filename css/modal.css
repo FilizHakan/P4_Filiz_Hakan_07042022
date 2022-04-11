@@ -40,7 +40,6 @@ img {
 }
 
 .topnav {
-  overflow: hidden;
   margin: 3.5%;
 }
 .header-logo {
@@ -93,6 +92,7 @@ img {
 @media screen and (max-width: 768px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
+    color: #fff;
     position: absolute;
     right: 0;
     top: 0;
@@ -185,7 +185,7 @@ main {
 }
 
 .content {
-  margin: 5% auto;
+  margin: 4% auto;
   width: 100%;
   max-width: 500px;
   animation-name: modalopen;
@@ -230,8 +230,8 @@ input {
   display: block;
   margin-top: 5px;
   margin-bottom: 7px;
-  text-align: right;
-  line-height: 0.3;
+  text-align: left;
+  line-height: 1;
   opacity: 0;
   transition: 0.3s;
 }
@@ -506,6 +506,42 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+.error {
+  color: #fe142f;
+  font-size: 50%;
+}
+
+.btn-thanks {
+  background: #fe142f;
+  display: block;
+  margin: 0 auto;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 12px 82px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  position: absolute;
+  margin: 50% 0% 1% 25%;
+}
+
+.btn-thanks:hover {
+  background: #3876ac;
+}
+
+.text-thanks {
+font-size: 30px;
+line-height: 2;
+font-weight: normal;
+text-align: center;
+}
+
+.thanks {
+  padding: 230px 2%;
+  margin: 15px auto;
+  display: none;
+  height: 700px;
+}
 
 @media screen and (max-width: 340px) {
   .formData[data-error]::after {
@@ -524,15 +560,14 @@ footer {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
   .btn-submit,
   .btn-signup {
     width: 180px;
     display: flex;
     justify-content: space-around;
-  }
-} 
+  } 
+
 @media screen and (max-width: 768px) {
   .topnav {
     flex-wrap: wrap;
@@ -612,4 +647,3 @@ footer {
     opacity: 1;
   }
 }
-
