@@ -29,7 +29,6 @@
       </a>
     </div>
     </div>
-  </div>
     <main>
       <div class="hero-section">
         <div class="hero-content">
@@ -58,7 +57,7 @@
           <span class="close"></span>
           <div class="thanks">
             <p class="text-thanks">Merci pour<br>votre inscription !</p>
-            <input class="btn-thanks" type="button" class="button" value="Fermer" />
+            <input class="btn-thanks button" type="button" value="Fermer" />
           </div>
           <div class="modal-body"> 
             <form
@@ -77,9 +76,7 @@
                   name="first"
                   minlength="2"
                 /><br>
-                <span class="error">
-                  <p id="first_error"></p>
-                </span>
+                <span id="first_error" class="error"></span>
               </div>
               <div class="formData">
                 <label for="last">Nom</label><br>
@@ -90,9 +87,7 @@
                   name="last"
                   minlength="2"
                 /><br>
-                <span class="error">
-                  <p id="last_error"></p>
-                </span>
+                <span id="last_error" class="error"></span>
               </div>
               <div
                 class="formData">
@@ -103,9 +98,7 @@
                   id="email"
                   name="email"
                 /><br>
-                <span class="error">
-                  <p id="email_error"></p>
-                </span>
+                <span id="email_error" class="error"></span>
               </div>
               <div
                 class="formData">
@@ -116,17 +109,13 @@
                   id="birthdate"
                   name="birthdate"
                 /><br>
-                <span class="error">
-                  <p id="birth_error"></p>
-                </span>
+                <span id="birth_error" class="error"></span>
               </div>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="tournament-counts" name="quantity" min="0" max="99">
-                <span class="error">
-                  <p id="tournament_error"></p>
-                </span>
+                <span id="tournament_error" class="error"></span>
               </div>
               <p class="text-label">À quel tournoi souhaitez-vous participer cette année ?</p>
               <div
@@ -197,9 +186,7 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
-                <span class="error">
-                  <p id="location_error"></p>
-                </span>
+                <div id="location_error" class="error"></div>
               </div>
 
               <div
@@ -210,15 +197,12 @@
                   type="checkbox"
                   id="checkbox1"
                   checked
-                  required
                 />
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
-                <span class="error">
-                  <div id="condition_error"></div>
-                </span>
+                <span id="condition_error" class="error"></span>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
