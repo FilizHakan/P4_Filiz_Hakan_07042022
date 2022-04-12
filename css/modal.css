@@ -511,6 +511,12 @@ footer {
   font-size: 50%;
 }
 
+.error i {
+color: rgb(4, 198, 4);
+padding-left: 370px;
+font-size: 15px;
+}
+
 .btn-thanks {
   background: #fe142f;
   display: block;

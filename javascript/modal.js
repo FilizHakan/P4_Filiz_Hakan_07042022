@@ -71,8 +71,9 @@ function validate() {
 
     errorCheck = true;
   } else {
-    document.getElementById("first_error").innerHTML = '';
-    firstName.style.border = '0px solid green';
+    document.getElementById("first_error").innerHTML = '<i class="fas fa-check-circle"></i>';
+    firstName.style.border = '2px solid rgb(4, 198, 4)';
+
   }
 
   // LAST NAME VALIDATION CHECK: 
@@ -86,8 +87,8 @@ function validate() {
  
     errorCheck = true;
   } else {
-    document.getElementById("last_error").innerHTML = '';
-    lastName.style.border = '0px solid green';
+    document.getElementById("last_error").innerHTML = '<i class="fas fa-check-circle"></i>';
+    lastName.style.border = '2px solid rgb(4, 198, 4)';
   }
 
 
@@ -101,24 +102,24 @@ function validate() {
   
     errorCheck = true;
   } else {
-    document.getElementById("email_error").innerHTML = '';
-    email.style.border = '0px solid green';
+    document.getElementById("email_error").innerHTML = '<i class="fas fa-check-circle"></i>';
+    email.style.border = '2px solid rgb(4, 198, 4)';
   }
 
   // BIRTHDATE VALIDATION CHECK:
   if  (birthDate.value == '') {
-    document.getElementById("birth_error").innerHTML = 'Veuillez saisir une date de naissance valide';
+    document.getElementById("birth_error").innerHTML = 'Veuillez saisir une date de naissance valide.';
     birthDate.focus();
     birthDate.style.border = '2px solid #fe142f';
 
     errorCheck = true;
   } else if (timeStampDate > currentDate) { 
-    document.getElementById("birth_error").innerHTML = 'La date ne peut pas excéder la date actuelle.';
+    document.getElementById("birth_error").innerHTML = 'Votre date de naissance ne peut pas excéder la date actuelle.';
     birthDate.focus();
     birthDate.style.border = '2px solid #fe142f';
   } else {
-    document.getElementById("birth_error").innerHTML = '';
-    birthDate.style.border = '0px solid green';
+    document.getElementById("birth_error").innerHTML = '<i class="fas fa-check-circle"></i>';
+    birthDate.style.border = '2px solid rgb(4, 198, 4)';
 
   }
 
@@ -135,8 +136,8 @@ function validate() {
     tournamentCounts.focus();
     tournamentCounts.style.border = '2px solid #fe142f';
   } else {
-    document.getElementById("tournament_error").innerHTML = '';
-    tournamentCounts.style.border = '0px solid green';
+    document.getElementById("tournament_error").innerHTML = '<i class="fas fa-check-circle"></i>';
+    tournamentCounts.style.border = '2px solid rgb(4, 198, 4)';
   }
 
   // RADIO BUTTON FOR CITY TOURNAMENT VALIDATION CHECK:
@@ -145,7 +146,7 @@ function validate() {
 
     errorCheck = true;
   } else {
-    document.getElementById("location_error").innerHTML = '';
+    document.getElementById("location_error").innerHTML = '<i class="fas fa-check-circle"></i>';
   }
 
   // TERMS AND CONDITIONS VALIDATION CHECK
