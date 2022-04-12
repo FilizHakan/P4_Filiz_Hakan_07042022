@@ -1,7 +1,7 @@
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
-    x.className += " responsive";
+    x.className += "responsive";
   } else {
     x.className = "topnav";
   }
@@ -153,7 +153,7 @@ function validate() {
 
   // TERMS AND CONDITIONS VALIDATION CHECK
   if (!termsConditionsCheckbox.checked) {
-    document.getElementById("condition_error").innerHTML = 'Veuillez accepter les termes et conditions.';
+    document.getElementById("condition_error").innerHTML = "Veuillez accepter les termes et conditions d'utilisation.";
 
     errorCheck = true;
   } else {
