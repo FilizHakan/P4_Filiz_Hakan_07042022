@@ -345,7 +345,7 @@ input[data-error]::after {
 .btn-signup {
   background: #fe142f;
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
   border-radius: 7px;
   font-size: 1rem;
   padding: 12px 82px;
@@ -540,6 +540,8 @@ font-size: 30px;
 line-height: 2;
 font-weight: normal;
 text-align: center;
+animation-name: modalopen;
+animation-duration: var(--modal-duration);
 }
 
 .thanks {
@@ -547,6 +549,8 @@ text-align: center;
   margin: 15px auto;
   display: none;
   height: 700px;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
 }
 
 @media screen and (max-width: 340px) {
@@ -556,6 +560,12 @@ text-align: center;
     color: #e54858;
     display: block;
   }
+  .error i {
+    color: rgb(4, 198, 4);
+    padding-left: 250px;
+    margin-top: 10px;
+    font-size: 15px;
+    }
 }
 
 @media screen and (max-width: 540px) {
@@ -573,7 +583,11 @@ text-align: center;
     display: flex;
     justify-content: space-around;
   } 
-
+  .error i {
+    padding-left: 330px;
+    margin-top: 10px;
+    }
+  }
 @media screen and (max-width: 768px) {
   .topnav {
     flex-wrap: wrap;
@@ -598,6 +612,11 @@ text-align: center;
   .content {
     margin: 8% auto;
   }
+  .error i {
+    padding-left: 390px;
+    margin-top: 10px;
+    font-size: 15px;
+    }
 }
 
 @media screen and (max-width: 800px) {
