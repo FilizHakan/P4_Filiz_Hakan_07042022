@@ -61,15 +61,15 @@ function validate() {
 
 
   // FIRST NAME VALIDATION CHECK: 
-  if ((firstName.value === '') 
-    || (firstName.value.length < 2)
-    || (lastName.value.length > 20)
-    || (!firstName.value.match(/^[a-zA-Z-\s]+$/))) {
+  if ((firstName.value === '') || (firstName.value == null)) { 
+    document.getElementById("first_error").innerHTML = 'Ce champ est obligatoire.';
+    firstName.focus();
+    firstName.style.border = '2px solid #fe142f';
+    errorCheck = true;
+  } else if ((firstName.value.length < 2) || (lastName.value.length > 20) || (!firstName.value.match(/^[a-zA-Z-\s]+$/))) {
     document.getElementById("first_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
     firstName.focus();
     firstName.style.border = '2px solid #fe142f';
-
-    errorCheck = true;
   } else {
     document.getElementById("first_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     firstName.style.border = '2px solid rgb(4, 198, 4)';
@@ -77,15 +77,16 @@ function validate() {
   }
 
   // LAST NAME VALIDATION CHECK: 
-  if ((lastName.value === '')
-    || (lastName.value.length < 2) 
-    || (!lastName.value.match(/^[a-zA-Z-\s]+$/)) 
-    || (lastName.value.length > 20)) {
-    document.getElementById("last_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
+  if ((lastName.value === null) || (lastName.value === '')) {
+    document.getElementById("last_error").innerHTML = 'Ce champ est obligatoire.';
     lastName.focus();
     lastName.style.border = '2px solid #fe142f';
  
     errorCheck = true;
+  } else if ((lastName.value.length < 2) || (!lastName.value.match(/^[a-zA-Z-\s]+$/)) || (lastName.value.length > 20)) {
+    document.getElementById("last_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
+    lastName.focus();
+    lastName.style.border = '2px solid #fe142f';
   } else {
     document.getElementById("last_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     lastName.style.border = '2px solid rgb(4, 198, 4)';
@@ -93,22 +94,24 @@ function validate() {
 
 
   // EMAIL ADDRESS VALIDATION CHECK: 
-  if ((!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)) 
-  || (email.value == null)
-  || (email.value == '')) {
-    document.getElementById("email_error").innerHTML = 'Veuillez entrer une adresse email valide.';
+  if ((email.value === null) || (email.value === '')) {
+    document.getElementById("email_error").innerHTML = 'Ce champ est obligatoire.';
     email.focus();
     email.style.border = '2px solid #fe142f';
   
     errorCheck = true;
+  } else if ((!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value))) {
+    document.getElementById("email_error").innerHTML = 'Veuillez entrer une adresse email valide.';
+    email.focus();
+    email.style.border = '2px solid #fe142f';
   } else {
     document.getElementById("email_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     email.style.border = '2px solid rgb(4, 198, 4)';
   }
 
   // BIRTHDATE VALIDATION CHECK:
-  if  (birthDate.value == '') {
-    document.getElementById("birth_error").innerHTML = 'Veuillez saisir une date de naissance valide.';
+  if  ((birthDate.value === '') || (birthDate.value === null)){
+    document.getElementById("birth_error").innerHTML = 'Ce champ est obligatoire.';
     birthDate.focus();
     birthDate.style.border = '2px solid #fe142f';
 
@@ -124,14 +127,13 @@ function validate() {
   }
 
   // TOURNAMENT NUMBER VALIDATION CHECK:
-  if ((tournamentCounts.value > 99) 
-    || (tournamentCounts.value < '0')) {
-    document.getElementById("tournament_error").innerHTML = 'Veuillez choisir un nombre entre 0 et 99.';
+  if (tournamentCounts.value > 99)  {
+    document.getElementById("tournament_error").innerHTML = 'Veuillez choisir une valeur numérique entre 0 et 99.';
     tournamentCounts.focus();
     tournamentCounts.style.border = '2px solid #fe142f';
 
     errorCheck = true;
-  } else if (tournamentCounts.value.length == '') {
+  } else if  (tournamentCounts.value < '0') {
     document.getElementById("tournament_error").innerHTML = 'Ce champ est obligatoire.';
     tournamentCounts.focus();
     tournamentCounts.style.border = '2px solid #fe142f';
@@ -165,7 +167,7 @@ function validate() {
     return true;
   }
  
-};
+}
 
 // FINAL TEST EVENT
 submitModal.addEventListener("click", finalTest); 
@@ -179,4 +181,4 @@ function finalTest(elt){
     modalBody.style.display = "none";
     thanks.style.display = "block";
   }
-};
+}
