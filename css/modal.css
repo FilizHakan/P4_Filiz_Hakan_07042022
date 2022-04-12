@@ -347,6 +347,7 @@ input[data-error]::after {
 }
 
 .btn-submit,
+.btn-thanks,
 .btn-signup {
   background: #fe142f;
   display: block;
@@ -531,17 +532,7 @@ font-size: 15px;
 }
 
 .btn-thanks {
-  background: #fe142f;
-  display: block;
-  margin: 0 auto;
-  border-radius: 7px;
-  font-size: 1rem;
-  padding: 12px 82px;
-  color: #fff;
-  cursor: pointer;
-  border: 0;
-  position: absolute;
-  margin: 50% 0% 1% 25%;
+  margin-top: 55%;
 }
 
 .btn-thanks:hover {
@@ -652,6 +643,7 @@ animation-duration: var(--modal-duration);
     display: block;
   }
   .btn-submit,
+  .btn-thanks,
   .btn-signup {
     width: 180px;
     display: flex;
