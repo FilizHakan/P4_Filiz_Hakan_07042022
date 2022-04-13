@@ -10,7 +10,6 @@ function editNav() {
 // DOM Elements - SET THE CONSTANTS
 const modalbg = document.querySelector(".bground");
 const submitModal = document.querySelector(".btn-submit");
-const reserveModal = document.getElementById("reserve");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const modalCloseBtn = document.querySelector(".close");
 const modalBody = document.querySelector(".modal-body");
@@ -34,13 +33,11 @@ thanksBtn.addEventListener("click", closeModal);
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  reserveModal.reset();
 }
 
 // Close modal form with the button cross (modal disappears on click)
 function closeModal() {
   modalbg.style.display="none";
-  reserveModal.reset();
 }
 
 // When the user clicks anywhere outside of the modal, (close it)
@@ -65,6 +62,7 @@ function validate() {
     document.getElementById("first_error").innerHTML = 'Ce champ est obligatoire.';
     firstName.focus();
     firstName.style.border = '2px solid #fe142f';
+    
     errorCheck = true;
   } else if ((firstName.value.length < 2) || (lastName.value.length > 20) || (!firstName.value.match(/^[a-zA-Z-\s]+$/))) {
     document.getElementById("first_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
