@@ -59,13 +59,19 @@ function validate() {
 
   // FIRST NAME VALIDATION CHECK: 
   if ((firstName.value === '') || (firstName.value == null)) { 
-    document.getElementById("first_error").innerHTML = 'Ce champ est obligatoire.';
+    document.getElementById("first_error").innerHTML = 'Le prénom est un champ obligatoire. Veuillez le renseigner.';
     firstName.focus();
     firstName.style.border = '2px solid #fe142f';
     
     errorCheck = true;
-  } else if ((firstName.value.length < 2) || (lastName.value.length > 20) || (!firstName.value.match(/^[a-zA-Z-\s]+$/))) {
-    document.getElementById("first_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
+  } else if (!firstName.value.match(/^[a-zA-Z-\s]+$/)) { // Add a new condition to alert the users of the non-validation of special caracters in his/her first name
+    document.getElementById("first_error").innerHTML = 'Les caractères spéciaux tels que +"*ç%&/()=?!_-.,/|<> ne sont pas valides.';
+    firstName.focus();
+    firstName.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
+  } else if ((firstName.value.length < 2) || (lastName.value.length > 20)) {
+    document.getElementById("first_error").innerHTML = "Veuillez entrer au moins 2 caractères valides.";
     firstName.focus();
     firstName.style.border = '2px solid #fe142f';
 
@@ -78,13 +84,19 @@ function validate() {
 
   // LAST NAME VALIDATION CHECK: 
   if ((lastName.value === null) || (lastName.value === '')) {
-    document.getElementById("last_error").innerHTML = 'Ce champ est obligatoire.';
+    document.getElementById("last_error").innerHTML = 'Le nom est un champ obligatoire. Veuillez le renseigner.';
     lastName.focus();
     lastName.style.border = '2px solid #fe142f';
  
     errorCheck = true;
-  } else if ((lastName.value.length < 2) || (!lastName.value.match(/^[a-zA-Z-\s]+$/)) || (lastName.value.length > 20)) {
-    document.getElementById("last_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
+  } else if (!lastName.value.match(/^[a-zA-Z-\s]+$/)){ // Add a new condition to alert the users of the non-validation of special caracters in his/her last name
+    document.getElementById("last_error").innerHTML = 'Les caractères spéciaux tels que +"*ç%&/()=?_-.,/|<> ne sont pas valides.';
+    lastName.focus();
+    lastName.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
+  } else if ((lastName.value.length < 2) || (lastName.value.length > 20)) {
+    document.getElementById("last_error").innerHTML = "Veuillez entrer au moins 2 caractères valides.";
     lastName.focus();
     lastName.style.border = '2px solid #fe142f';
 
@@ -97,13 +109,13 @@ function validate() {
 
   // EMAIL ADDRESS VALIDATION CHECK: 
   if ((email.value === null) || (email.value === '')) {
-    document.getElementById("email_error").innerHTML = 'Ce champ est obligatoire.';
+    document.getElementById("email_error").innerHTML = "L'email est un champ obligatoire. Veuillez le renseigner.";
     email.focus();
     email.style.border = '2px solid #fe142f';
   
     errorCheck = true;
   } else if ((!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value))) {
-    document.getElementById("email_error").innerHTML = 'Veuillez entrer une adresse email valide.';
+    document.getElementById("email_error").innerHTML = 'Veuillez respecter le format email: exemple@domaine.com.';
     email.focus(); 
     email.style.border = '2px solid #fe142f';
 
@@ -115,13 +127,19 @@ function validate() {
 
   // BIRTHDATE VALIDATION CHECK:
   if  ((birthDate.value === '') || (birthDate.value === null)){
-    document.getElementById("birth_error").innerHTML = 'Ce champ est obligatoire.';
+    document.getElementById("birth_error").innerHTML = "Votre date de naissance est un champ obligatoire. Veuillez le renseigner.";
     birthDate.focus();
     birthDate.style.border = '2px solid #fe142f';
 
     errorCheck = true;
   } else if (timeStampDate > currentDate) { 
     document.getElementById("birth_error").innerHTML = 'Votre date de naissance ne peut pas excéder la date actuelle.';
+    birthDate.focus();
+    birthDate.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
+  } else if ((!document.querySelector('input[min = "1900-01-01"]:valid'))) { // Add a new condition to limit the date to 1900-01-01
+    document.getElementById("birth_error").innerHTML = "Veuillez saisir une date de naissance valide.";
     birthDate.focus();
     birthDate.style.border = '2px solid #fe142f';
 
@@ -134,7 +152,7 @@ function validate() {
 
   // TOURNAMENT NUMBER VALIDATION CHECK:
   if ((tournamentCounts.value === null) || (tournamentCounts.value === '')) {
-    document.getElementById("tournament_error").innerHTML = 'Ce champ est obligatoire.';
+    document.getElementById("tournament_error").innerHTML = "Le nombre de participation est un champ obligatoire. Veuillez le renseigner.";
     tournamentCounts.focus();
     tournamentCounts.style.border = '2px solid #fe142f';
 
@@ -168,7 +186,7 @@ function validate() {
     document.getElementById("condition_error").innerHTML = '';
   }
 
-  // VALIDATION CHECK : SHOW ALL ERROR MESSAGES
+  // VALIDATION CHECK : BLOCK SUBMIT & SHOW ERROR MESSAGES
   if (errorCheck === true) {
     return false;
   } else {
