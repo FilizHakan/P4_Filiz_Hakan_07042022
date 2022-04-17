@@ -125,14 +125,14 @@ function validate() {
   }
 
   // TOURNAMENT NUMBER VALIDATION CHECK:
-  if (tournamentCounts.value > 99)  {
-    document.getElementById("tournament_error").innerHTML = 'Veuillez choisir une valeur numérique entre 0 et 99.';
+  if ((tournamentCounts.value === null) || (tournamentCounts.value === '')) {
+    document.getElementById("tournament_error").innerHTML = 'Ce champ est obligatoire.';
     tournamentCounts.focus();
     tournamentCounts.style.border = '2px solid #fe142f';
 
     errorCheck = true;
-  } else if  (tournamentCounts.value < '0') {
-    document.getElementById("tournament_error").innerHTML = 'Ce champ est obligatoire.';
+  } else if  ((tournamentCounts.value < '0') || (tournamentCounts.value > 99)) {
+    document.getElementById("tournament_error").innerHTML = 'Veuillez choisir une valeur numérique entre 0 et 99.';
     tournamentCounts.focus();
     tournamentCounts.style.border = '2px solid #fe142f';
   } else {
@@ -173,7 +173,7 @@ submitModal.addEventListener("click", finalTest);
 // FUNCTION PREVENT BROWSER FROM CHANGING PAGE ONCLICK AND CREATE THE LAYOUT FOR THE THANK YOU MESSAGE
 function finalTest(elt){
   elt.preventDefault();
-  if (!validate()) {
+  if (!validate()) { 
     return false;
   } else {
     modalBody.style.display = "none";
