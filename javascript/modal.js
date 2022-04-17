@@ -100,7 +100,7 @@ function validate() {
     errorCheck = true;
   } else if ((!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value))) {
     document.getElementById("email_error").innerHTML = 'Veuillez entrer une adresse email valide.';
-    email.focus();
+    email.focus(); 
     email.style.border = '2px solid #fe142f';
   } else {
     document.getElementById("email_error").innerHTML = '<i class="fas fa-check-circle"></i>';
