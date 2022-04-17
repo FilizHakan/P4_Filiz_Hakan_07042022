@@ -68,6 +68,8 @@ function validate() {
     document.getElementById("first_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
     firstName.focus();
     firstName.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
   } else {
     document.getElementById("first_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     firstName.style.border = '2px solid rgb(4, 198, 4)';
@@ -85,6 +87,8 @@ function validate() {
     document.getElementById("last_error").innerHTML = 'Veuillez entrer au moins 2 caractères valides.';
     lastName.focus();
     lastName.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
   } else {
     document.getElementById("last_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     lastName.style.border = '2px solid rgb(4, 198, 4)';
@@ -102,6 +106,8 @@ function validate() {
     document.getElementById("email_error").innerHTML = 'Veuillez entrer une adresse email valide.';
     email.focus(); 
     email.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
   } else {
     document.getElementById("email_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     email.style.border = '2px solid rgb(4, 198, 4)';
@@ -118,6 +124,8 @@ function validate() {
     document.getElementById("birth_error").innerHTML = 'Votre date de naissance ne peut pas excéder la date actuelle.';
     birthDate.focus();
     birthDate.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
   } else {
     document.getElementById("birth_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     birthDate.style.border = '2px solid rgb(4, 198, 4)';
@@ -135,6 +143,8 @@ function validate() {
     document.getElementById("tournament_error").innerHTML = 'Veuillez choisir une valeur numérique entre 0 et 99.';
     tournamentCounts.focus();
     tournamentCounts.style.border = '2px solid #fe142f';
+
+    errorCheck = true;
   } else {
     document.getElementById("tournament_error").innerHTML = '<i class="fas fa-check-circle"></i>';
     tournamentCounts.style.border = '2px solid rgb(4, 198, 4)';
